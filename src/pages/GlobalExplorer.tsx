@@ -97,7 +97,7 @@ export default function GlobalExplorer() {
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
         >
-          <Coins className="w-12 h-12 text-gold-500" />
+          <Coins className="w-12 h-12 text-[#b87333]" />
         </motion.div>
       </div>
     );
@@ -109,8 +109,8 @@ export default function GlobalExplorer() {
       <header className="relative pt-20 pb-16 px-6">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full">
-            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-gold-100/30 blur-[120px] rounded-full" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-gold-100/30 blur-[120px] rounded-full" />
+            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-copper-100/30 blur-[120px] rounded-full" />
+            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-copper-100/30 blur-[120px] rounded-full" />
           </div>
         </div>
 
@@ -120,11 +120,11 @@ export default function GlobalExplorer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold-100 text-gold-800 text-xs font-semibold tracking-widest uppercase mb-6 border border-gold-200">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-copper-100 text-copper-800 text-xs font-semibold tracking-widest uppercase mb-6 border border-copper-200">
               Global Wealth Perspective
             </span>
             <h1 className="text-5xl md:text-7xl font-serif font-medium tracking-tight text-[#0a192f] mb-6">
-              Where Are You a <span className="text-gold-600 italic">Millionaire? 🌍</span>
+              Where Are You a <span className="text-copper-600 italic">Millionaire? 🌍</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
               Discover how far your money really goes around the world.
@@ -139,8 +139,8 @@ export default function GlobalExplorer() {
             className="mt-12 max-w-xl mx-auto"
           >
             <div className="relative group">
-              <div className="absolute inset-0 bg-gold-500/5 blur-2xl group-focus-within:bg-gold-500/10 transition-colors rounded-3xl pointer-events-none" />
-              <div className="relative flex flex-col md:flex-row items-stretch gap-2 p-2 bg-white rounded-2xl shadow-xl shadow-gold-900/5 border border-gold-100">
+              <div className="absolute inset-0 bg-copper-500/5 blur-2xl group-focus-within:bg-copper-500/10 transition-colors rounded-3xl pointer-events-none" />
+              <div className="relative flex flex-col md:flex-row items-stretch gap-2 p-2 bg-white rounded-2xl shadow-xl shadow-copper-900/5 border border-copper-100">
                 <div className="relative flex-1">
                   <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                     <span className="text-lg font-medium">{baseCurrency.symbol}</span>
@@ -193,7 +193,7 @@ export default function GlobalExplorer() {
                               }}
                               className={cn(
                                 "w-full flex items-center justify-between p-3 rounded-lg transition-colors text-left",
-                                baseCurrencyCode === c.code ? "bg-gold-50 text-gold-700" : "hover:bg-gray-50"
+                                baseCurrencyCode === c.code ? "bg-copper-50 text-copper-700" : "hover:bg-gray-50"
                               )}
                             >
                               <span className="flex items-center gap-3">
@@ -208,7 +208,7 @@ export default function GlobalExplorer() {
                                   <div className="text-xs text-gray-500 mt-1">{c.name}</div>
                                 </div>
                               </span>
-                              {baseCurrencyCode === c.code && <div className="w-2 h-2 rounded-full bg-gold-500" />}
+                              {baseCurrencyCode === c.code && <div className="w-2 h-2 rounded-full bg-copper-500" />}
                             </button>
                           ))}
                         </motion.div>
@@ -220,7 +220,7 @@ export default function GlobalExplorer() {
               <div className="relative z-10 mt-6 flex flex-col items-center gap-4">
                 <button 
                   onClick={() => document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="px-8 py-4 rounded-2xl bg-[#0a192f] text-white text-lg font-bold hover:bg-gold-600 transition-all shadow-xl shadow-navy-900/20 active:scale-95 cursor-pointer"
+                  className="px-8 py-4 rounded-2xl bg-[#0a192f] text-white text-lg font-bold hover:bg-copper-600 transition-all shadow-xl shadow-navy-900/20 active:scale-95 cursor-pointer"
                 >
                   Check My Status
                 </button>
@@ -239,10 +239,10 @@ export default function GlobalExplorer() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="flex flex-wrap items-center justify-center gap-8 py-8 border-y border-gold-200/50"
+          className="flex flex-wrap items-center justify-center gap-8 py-8 border-y border-copper-200/50"
         >
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gold-100 flex items-center justify-center text-gold-600">
+            <div className="w-10 h-10 rounded-full bg-copper-100 flex items-center justify-center text-copper-600">
               <Globe2 className="w-5 h-5" />
             </div>
             <div>
@@ -251,7 +251,7 @@ export default function GlobalExplorer() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gold-100 flex items-center justify-center text-gold-600">
+            <div className="w-10 h-10 rounded-full bg-copper-100 flex items-center justify-center text-copper-600">
               <TrendingUp className="w-5 h-5" />
             </div>
             <div>
@@ -260,7 +260,7 @@ export default function GlobalExplorer() {
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-gold-100 flex items-center justify-center text-gold-600">
+            <div className="w-10 h-10 rounded-full bg-copper-100 flex items-center justify-center text-copper-600">
               <Coins className="w-5 h-5" />
             </div>
             <div>
@@ -279,9 +279,9 @@ export default function GlobalExplorer() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
-              className="relative p-8 md:p-12 rounded-[2.5rem] bg-white border border-gold-100 shadow-2xl shadow-gold-900/10 overflow-hidden"
+              className="relative p-8 md:p-12 rounded-[2.5rem] bg-white border border-copper-100 shadow-2xl shadow-copper-900/10 overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-64 h-64 bg-gold-50/50 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-copper-50/50 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
               
               <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
@@ -291,7 +291,7 @@ export default function GlobalExplorer() {
                     transition={{ delay: 0.2 }}
                   >
                     <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#0a192f] leading-tight mb-4">
-                      You are a <span className="text-gold-600 italic">MILLIONAIRE</span> in <span className="underline decoration-gold-300 underline-offset-8">{millionaireCount}</span> countries 💰
+                      You are a <span className="text-copper-600 italic">MILLIONAIRE</span> in <span className="underline decoration-copper-300 underline-offset-8">{millionaireCount}</span> countries 💰
                     </h2>
                     <p className="text-lg text-gray-500 font-light">
                       Your current net worth of {baseCurrency.symbol}{parseFloat(amount).toLocaleString()} {baseCurrency.code} grants you extraordinary status across the globe.
@@ -305,7 +305,7 @@ export default function GlobalExplorer() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 }}
-                      className="p-6 rounded-3xl bg-gray-50 border border-gray-100 group hover:border-gold-200 transition-colors"
+                      className="p-6 rounded-3xl bg-gray-50 border border-gray-100 group hover:border-copper-200 transition-colors"
                     >
                       <div className="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-4">Closest Milestone</div>
                       <div className="flex items-center gap-3 mb-3">
@@ -318,7 +318,7 @@ export default function GlobalExplorer() {
                         <span className="font-serif font-bold text-gray-900">{closestCountry.currency.country}</span>
                       </div>
                       <div className="text-sm text-gray-600">
-                        You need <span className="font-bold text-gold-600">{baseCurrency.symbol}{Math.ceil(closestCountry.valueForOneMillion - parseFloat(amount)).toLocaleString()}</span> more to be a millionaire here.
+                        You need <span className="font-bold text-copper-600">{baseCurrency.symbol}{Math.ceil(closestCountry.valueForOneMillion - parseFloat(amount)).toLocaleString()}</span> more to be a millionaire here.
                       </div>
                     </motion.div>
                   )}
@@ -328,9 +328,9 @@ export default function GlobalExplorer() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 }}
-                      className="p-6 rounded-3xl bg-gold-50/30 border border-gold-100 group hover:border-gold-300 transition-colors"
+                      className="p-6 rounded-3xl bg-copper-50/30 border border-copper-100 group hover:border-copper-300 transition-colors"
                     >
-                      <div className="text-[10px] text-gold-500 uppercase tracking-widest font-bold mb-4">Maximum Power</div>
+                      <div className="text-[10px] text-copper-500 uppercase tracking-widest font-bold mb-4">Maximum Power</div>
                       <div className="flex items-center gap-3 mb-3">
                         <img 
                           src={`https://flagcdn.com/w40/${furthestCountry.currency.iso}.png`} 
@@ -341,7 +341,7 @@ export default function GlobalExplorer() {
                         <span className="font-serif font-bold text-gray-900">{furthestCountry.currency.country}</span>
                       </div>
                       <div className="text-sm text-gray-600">
-                        Your money goes furthest in <span className="font-bold text-gold-600">{furthestCountry.currency.country}</span>, where you are worth <span className="font-bold text-gold-600">{furthestCountry.currency.symbol}{furthestCountry.localAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>.
+                        Your money goes furthest in <span className="font-bold text-copper-600">{furthestCountry.currency.country}</span>, where you are worth <span className="font-bold text-copper-600">{furthestCountry.currency.symbol}{furthestCountry.localAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>.
                       </div>
                     </motion.div>
                   )}
@@ -361,9 +361,9 @@ export default function GlobalExplorer() {
             exit={{ opacity: 0, y: 10 }}
             className="max-w-7xl mx-auto px-6 mb-16"
           >
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-6 rounded-3xl bg-gold-50/20 border border-gold-100/50">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-6 rounded-3xl bg-copper-50/20 border border-copper-100/50">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-white border border-gold-100 flex items-center justify-center text-gold-600 shadow-sm">
+                <div className="w-12 h-12 rounded-2xl bg-white border border-copper-100 flex items-center justify-center text-copper-600 shadow-sm">
                   <Share2 className="w-6 h-6" />
                 </div>
                 <div>
@@ -380,9 +380,9 @@ export default function GlobalExplorer() {
                     setCopied(true);
                     setTimeout(() => setCopied(false), 2000);
                   }}
-                  className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white border border-gray-100 hover:border-gold-300 transition-all shadow-sm text-sm font-bold text-gray-700 group"
+                  className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white border border-gray-100 hover:border-copper-300 transition-all shadow-sm text-sm font-bold text-gray-700 group"
                 >
-                  {copied ? <Check className="w-4 h-4 text-green-500" /> : <Link className="w-4 h-4 text-gold-500 group-hover:scale-110 transition-transform" />}
+                  {copied ? <Check className="w-4 h-4 text-green-500" /> : <Link className="w-4 h-4 text-copper-500 group-hover:scale-110 transition-transform" />}
                   {copied ? 'Copied!' : 'Copy Link'}
                 </button>
 
@@ -453,10 +453,10 @@ export default function GlobalExplorer() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="p-8 rounded-[2rem] bg-white border border-gold-100/50 hover:border-gold-300 transition-all duration-500 group flex flex-col justify-between"
+              className="p-8 rounded-[2rem] bg-white border border-copper-100/50 hover:border-copper-300 transition-all duration-500 group flex flex-col justify-between"
             >
               <div>
-                <div className="w-10 h-10 rounded-xl bg-gold-50 text-gold-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-copper-50 text-copper-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   {item.icon}
                 </div>
                 <h3 className="text-xl font-serif font-bold text-[#0a192f] mb-3 leading-tight">
@@ -472,15 +472,15 @@ export default function GlobalExplorer() {
                   const content = {
                     "Grow your wealth globally.": (
                       <div className="space-y-6">
-                        <div className="p-6 rounded-2xl bg-gold-50/30 border border-gold-100">
+                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Offshore Banking</h4>
                           <p className="text-sm text-gray-600">Diversify your holdings in stable, high-privacy jurisdictions to protect your capital from local volatility.</p>
                         </div>
-                        <div className="p-6 rounded-2xl bg-gold-50/30 border border-gold-100">
+                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Emerging Market Real Estate</h4>
                           <p className="text-sm text-gray-600">Invest in high-growth economies like Thailand or Mexico where property appreciation and rental yields often outpace Western markets.</p>
                         </div>
-                        <div className="p-6 rounded-2xl bg-gold-50/30 border border-gold-100">
+                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Global Index Funds</h4>
                           <p className="text-sm text-gray-600">Broaden your portfolio beyond domestic stocks to capture the growth of the entire global economy.</p>
                         </div>
@@ -488,15 +488,15 @@ export default function GlobalExplorer() {
                     ),
                     "Track your net worth.": (
                       <div className="space-y-6">
-                        <div className="p-6 rounded-2xl bg-gold-50/30 border border-gold-100">
+                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Multi-Currency Dashboard</h4>
                           <p className="text-sm text-gray-600">Monitor your assets across 130+ currencies in real-time. See your total wealth consolidated into your base currency instantly.</p>
                         </div>
-                        <div className="p-6 rounded-2xl bg-gold-50/30 border border-gold-100">
+                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Purchasing Power Tracking</h4>
                           <p className="text-sm text-gray-600">Don't just track numbers; track what they can buy. See how your lifestyle potential changes as exchange rates fluctuate.</p>
                         </div>
-                        <div className="p-6 rounded-2xl bg-gold-50/30 border border-gold-100">
+                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Asset Allocation Insights</h4>
                           <p className="text-sm text-gray-600">Visualize your global footprint and identify where you are over-exposed or under-invested.</p>
                         </div>
@@ -504,15 +504,15 @@ export default function GlobalExplorer() {
                     ),
                     "Live like a millionaire abroad.": (
                       <div className="space-y-6">
-                        <div className="p-6 rounded-2xl bg-gold-50/30 border border-gold-100">
+                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Value-Luxury Destinations</h4>
                           <p className="text-sm text-gray-600">Discover countries where $1,000/month buys a penthouse and a private chef. We curate the best balance of safety, infrastructure, and cost.</p>
                         </div>
-                        <div className="p-6 rounded-2xl bg-gold-50/30 border border-gold-100">
+                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Residency by Investment</h4>
                           <p className="text-sm text-gray-600">Learn about 'Golden Visas' and digital nomad programs that allow you to live a high-end lifestyle in beautiful countries legally and long-term.</p>
                         </div>
-                        <div className="p-6 rounded-2xl bg-gold-50/30 border border-gold-100">
+                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Global Lifestyle Concierge</h4>
                           <p className="text-sm text-gray-600">Access exclusive data on the best neighborhoods, international schools, and luxury amenities in emerging millionaire hubs.</p>
                         </div>
@@ -521,7 +521,7 @@ export default function GlobalExplorer() {
                   }[item.title];
                   setActiveFeature({ title: item.title, content });
                 }}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gray-50 text-[#0a192f] text-xs font-bold uppercase tracking-widest hover:bg-gold-500 hover:text-white transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gray-50 text-[#0a192f] text-xs font-bold uppercase tracking-widest hover:bg-copper-500 hover:text-white transition-all cursor-pointer"
               >
                 {item.cta}
                 <ArrowRight className="w-3 h-3" />
@@ -603,7 +603,7 @@ export default function GlobalExplorer() {
                       referrerPolicy="no-referrer"
                     />
                     <div>
-                      <h3 className="font-serif font-bold text-lg leading-tight group-hover:text-gold-700 transition-colors">
+                      <h3 className="font-serif font-bold text-lg leading-tight group-hover:text-copper-700 transition-colors">
                         {result.currency.country}
                       </h3>
                       <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">
@@ -613,7 +613,7 @@ export default function GlobalExplorer() {
                   </div>
                   <div className={cn(
                     "px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-tighter",
-                    result.localAmount >= 1000000 ? "bg-gold-500 text-white shadow-sm" :
+                    result.localAmount >= 1000000 ? "bg-copper-500 text-white shadow-sm" :
                     result.localAmount >= 250000 ? "bg-gray-100 text-gray-600 border border-gray-200" :
                     "bg-gray-50 text-gray-400 border border-gray-100"
                   )}>
@@ -628,7 +628,7 @@ export default function GlobalExplorer() {
                     <div className="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Your Worth Here</div>
                     <div className={cn(
                       "text-2xl font-serif font-bold",
-                      result.isMillionaire ? "text-gold-600" : "text-gray-900"
+                      result.isMillionaire ? "text-copper-600" : "text-gray-900"
                     )}>
                       {result.currency.symbol} {result.localAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                     </div>
@@ -692,7 +692,7 @@ export default function GlobalExplorer() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed inset-x-4 bottom-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-[70] w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl border border-gold-100 overflow-hidden"
+              className="fixed inset-x-4 bottom-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-[70] w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl border border-copper-100 overflow-hidden"
             >
               <button 
                 onClick={() => setSelectedResult(null)}
@@ -703,8 +703,8 @@ export default function GlobalExplorer() {
 
               <div className="max-h-[85vh] overflow-y-auto">
                 {/* Header */}
-                <div className="relative h-48 bg-gold-50 flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-gold-400 via-transparent to-transparent" />
+                <div className="relative h-48 bg-copper-50 flex items-center justify-center overflow-hidden">
+                  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-copper-400 via-transparent to-transparent" />
                   <motion.img 
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -718,7 +718,7 @@ export default function GlobalExplorer() {
                 <div className="p-8 md:p-12">
                   <div className="mb-8">
                     <h2 className="text-4xl font-serif font-bold text-gray-900 mb-2">{selectedResult.currency.country}</h2>
-                    <p className="text-gold-600 font-medium tracking-widest uppercase text-xs">{selectedResult.currency.name}</p>
+                    <p className="text-copper-600 font-medium tracking-widest uppercase text-xs">{selectedResult.currency.name}</p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
@@ -737,8 +737,8 @@ export default function GlobalExplorer() {
                       </div>
                     </div>
 
-                    <div className="p-6 rounded-3xl bg-gold-50/30 border border-gold-100">
-                      <div className="text-[10px] text-gold-500 uppercase tracking-widest font-bold mb-2">Status Insight</div>
+                    <div className="p-6 rounded-3xl bg-copper-50/30 border border-copper-100">
+                      <div className="text-[10px] text-copper-500 uppercase tracking-widest font-bold mb-2">Status Insight</div>
                       <div className="text-gray-700 font-medium mb-4">
                         {selectedResult.isMillionaire 
                           ? "You have achieved elite status in this economy." 
@@ -746,7 +746,7 @@ export default function GlobalExplorer() {
                       </div>
                       {!selectedResult.isMillionaire && (
                         <div className="text-sm text-gray-500">
-                          Gap: <span className="text-gold-600 font-bold">{baseCurrency.symbol}{Math.ceil(selectedResult.valueForOneMillion - parseFloat(amount)).toLocaleString()}</span>
+                          Gap: <span className="text-copper-600 font-bold">{baseCurrency.symbol}{Math.ceil(selectedResult.valueForOneMillion - parseFloat(amount)).toLocaleString()}</span>
                         </div>
                       )}
                     </div>
@@ -761,7 +761,7 @@ export default function GlobalExplorer() {
                     <div className="grid grid-cols-2 gap-4">
                       {getLifestyleData(selectedResult.currency.code).items.map((item, i) => (
                         <div key={i} className="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border border-gray-100">
-                          <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-gold-600 shadow-sm">
+                          <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-copper-600 shadow-sm">
                             {item.icon === 'Home' && <Home className="w-4 h-4" />}
                             {item.icon === 'Utensils' && <Utensils className="w-4 h-4" />}
                             {item.icon === 'Plane' && <Plane className="w-4 h-4" />}
@@ -810,17 +810,17 @@ export default function GlobalExplorer() {
                 <div className="p-8 md:p-12">
                   <div className="mb-8">
                     <h2 className="text-3xl font-serif font-bold text-[#0a192f] mb-4">{activeFeature.title}</h2>
-                    <div className="w-20 h-1 bg-gold-500 rounded-full" />
+                    <div className="w-20 h-1 bg-copper-500 rounded-full" />
                   </div>
 
-                  <div className="prose prose-gold max-w-none">
+                  <div className="prose prose-copper max-w-none">
                     {activeFeature.content}
                   </div>
 
                   <div className="mt-12 pt-8 border-t border-gray-100">
                     <button 
                       onClick={() => setActiveFeature(null)}
-                      className="w-full py-4 rounded-2xl bg-[#0a192f] text-white font-bold uppercase tracking-widest text-xs hover:bg-gold-600 transition-colors"
+                      className="w-full py-4 rounded-2xl bg-[#0a192f] text-white font-bold uppercase tracking-widest text-xs hover:bg-copper-600 transition-colors"
                     >
                       Close Details
                     </button>

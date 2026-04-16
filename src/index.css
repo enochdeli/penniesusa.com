@@ -5,17 +5,17 @@
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Cormorant Garamond", serif;
   
-  --color-gold-50: #fdfaf3;
-  --color-gold-100: #f9f1df;
-  --color-gold-200: #f1e0b9;
-  --color-gold-300: #e6c88a;
-  --color-gold-400: #dbaa5c;
-  --color-gold-500: #d4af37; /* Primary Gold */
-  --color-gold-600: #b88e2d;
-  --color-gold-700: #966e26;
-  --color-gold-800: #7a5a24;
-  --color-gold-900: #644a21;
-  --color-gold-950: #392810;
+  --color-copper-50: #fdf8f4;
+  --color-copper-100: #f9ece1;
+  --color-copper-200: #f1d2b9;
+  --color-copper-300: #e6b18a;
+  --color-copper-400: #db8c5c;
+  --color-copper-500: #b87333; /* Primary Copper */
+  --color-copper-600: #8b4513;
+  --color-copper-700: #723a10;
+  --color-copper-800: #5a2e0d;
+  --color-copper-900: #4a260b;
+  --color-copper-950: #2d1707;
 }
 
 @layer base {

@@ -16,7 +16,7 @@ export default function About() {
     {
       title: "Financial Empowerment",
       desc: "Tools designed to help you discover opportunities you didn't know existed.",
-      icon: <Sparkles className="w-6 h-6 text-gold-500" />
+      icon: <Sparkles className="w-6 h-6 text-copper-500" />
     }
   ];
 
@@ -29,12 +29,12 @@ export default function About() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
           >
-            <span className="text-gold-600 font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Our Mission</span>
+            <span className="text-copper-600 font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Our Mission</span>
             <h1 className="text-5xl md:text-6xl font-serif font-medium text-[#0a192f] mb-8 leading-tight">
-              Redefining Wealth for the <span className="text-gold-600 italic">Modern Nomad.</span>
+              Redefining Wealth for the <span className="text-copper-600 italic">Modern Nomad.</span>
             </h1>
             <p className="text-gray-500 text-lg font-light leading-relaxed mb-8">
-              "Where Am I a Millionaire?" was born from a simple realization: your net worth is relative. In a world that is increasingly connected yet economically diverse, understanding your purchasing power globally is the first step toward true financial freedom.
+              <span className="font-bold text-[#0a192f]">penniesusa</span> was born from a simple realization: your net worth is relative. In a world that is increasingly connected yet economically diverse, understanding your purchasing power globally is the first step toward true financial freedom.
             </p>
             <div className="flex items-center gap-6">
               <div className="flex -space-x-4">
@@ -45,7 +45,7 @@ export default function About() {
                 ))}
               </div>
               <div className="text-sm font-medium text-gray-900">
-                Joined by <span className="text-gold-600 font-bold">50,000+</span> global explorers
+                Joined by <span className="text-copper-600 font-bold">50,000+</span> global explorers
               </div>
             </div>
           </motion.div>
@@ -55,7 +55,7 @@ export default function About() {
             animate={{ opacity: 1, scale: 1 }}
             className="relative"
           >
-            <div className="aspect-square rounded-[3rem] bg-gold-100 overflow-hidden">
+            <div className="aspect-square rounded-[3rem] bg-copper-100 overflow-hidden">
               <img 
                 src="https://picsum.photos/seed/luxury-travel/800/800" 
                 alt="Luxury Travel" 
@@ -63,7 +63,7 @@ export default function About() {
                 referrerPolicy="no-referrer"
               />
             </div>
-            <div className="absolute -bottom-10 -left-10 p-8 rounded-3xl bg-white shadow-2xl border border-gold-100 max-w-xs">
+            <div className="absolute -bottom-10 -left-10 p-8 rounded-3xl bg-white shadow-2xl border border-copper-100 max-w-xs">
               <Heart className="w-8 h-8 text-red-500 mb-4 fill-current" />
               <p className="text-sm font-medium text-[#0a192f]">
                 "This tool changed how I view my retirement. I'm not just saving; I'm planning my global life."
@@ -98,9 +98,9 @@ export default function About() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="p-12 md:p-20 rounded-[3rem] bg-gray-50 border border-gold-100 text-center"
+          className="p-12 md:p-20 rounded-[3rem] bg-gray-50 border border-copper-100 text-center"
         >
-          <Users className="w-12 h-12 text-gold-500 mx-auto mb-8" />
+          <Users className="w-12 h-12 text-copper-500 mx-auto mb-8" />
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-[#0a192f] mb-6">Built for the Global Community</h2>
           <p className="text-gray-500 max-w-2xl mx-auto font-light text-lg mb-12">
             We are a team of economists, developers, and travelers dedicated to making global wealth data accessible to everyone.
@@ -115,7 +115,7 @@ export default function About() {
               <span className="font-bold text-[#0a192f] uppercase tracking-widest text-xs">130+ Countries</span>
             </div>
             <div className="flex items-center gap-3">
-              <Sparkles className="w-6 h-6 text-gold-500" />
+              <Sparkles className="w-6 h-6 text-copper-500" />
               <span className="font-bold text-[#0a192f] uppercase tracking-widest text-xs">AI Powered Insights</span>
             </div>
           </div>

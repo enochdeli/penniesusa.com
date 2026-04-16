@@ -1,6 +1,6 @@
 {
-  "name": "Where Am I a Millionaire?",
-  "description": "Discover where your net worth makes you a millionaire in local currency.",
+  "name": "penniesusa",
+  "description": "Discover your global purchasing power. Convert your net worth into 130+ currencies to find exactly where you’re a millionaire today.",
   "requestFramePermissions": [],
   "majorCapabilities": []
 }
