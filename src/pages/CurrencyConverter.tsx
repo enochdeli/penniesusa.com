@@ -1,0 +1,284 @@
+import { useState, useEffect, useMemo, useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ArrowRightLeft, Search, ChevronDown, Coins, RefreshCcw } from 'lucide-react';
+import { CURRENCIES } from '../constants';
+import { fetchExchangeRates } from '../services/currencyService';
+import { ExchangeRates } from '../types';
+import { cn } from '../lib/utils';
+
+export default function CurrencyConverter() {
+  const [fromAmount, setFromAmount] = useState<string>('1000');
+  const [fromCurrencyCode, setFromCurrencyCode] = useState<string>('USD');
+  const [toCurrencyCode, setToCurrencyCode] = useState<string>('MXN');
+  
+  const [rates, setRates] = useState<ExchangeRates | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function init() {
+      const fetchedRates = await fetchExchangeRates();
+      setRates(fetchedRates);
+      setLoading(false);
+    }
+    init();
+  }, []);
+
+  const fromCurrency = useMemo(() => 
+    CURRENCIES.find(c => c.code === fromCurrencyCode) || CURRENCIES[0],
+    [fromCurrencyCode]
+  );
+  
+  const toCurrency = useMemo(() => 
+    CURRENCIES.find(c => c.code === toCurrencyCode) || CURRENCIES[12] || CURRENCIES[1],
+    [toCurrencyCode]
+  );
+
+  const convertedAmount = useMemo(() => {
+    if (!rates || !fromAmount) return 0;
+    const numAmount = parseFloat(fromAmount) || 0;
+    const amountInUSD = numAmount / (rates[fromCurrencyCode] || 1);
+    return amountInUSD * (rates[toCurrencyCode] || 1);
+  }, [fromAmount, fromCurrencyCode, toCurrencyCode, rates]);
+
+  const exchangeRate = useMemo(() => {
+    if (!rates) return 0;
+    return (1 / (rates[fromCurrencyCode] || 1)) * (rates[toCurrencyCode] || 1);
+  }, [fromCurrencyCode, toCurrencyCode, rates]);
+
+  const handleSwap = () => {
+    setFromCurrencyCode(toCurrencyCode);
+    setToCurrencyCode(fromCurrencyCode);
+  };
+
+  return (
+    <div className="pt-20 min-h-screen bg-[#fcfaf7]">
+      <header className="relative pt-20 pb-16 px-6">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full">
+            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-100/30 blur-[120px] rounded-full" />
+            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-100/30 blur-[120px] rounded-full" />
+          </div>
+        </div>
+
+        <div className="max-w-4xl mx-auto text-center relative z-10">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-800 text-xs font-semibold tracking-widest uppercase mb-6 border border-brand-200">
+              Live Exchange Rates
+            </span>
+            <h1 className="text-5xl md:text-6xl font-display font-black tracking-tight text-[#0a192f] mb-6">
+              Global Currency <span className="text-brand-600 italic">Converter</span>
+            </h1>
+            <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
+              Convert between 130+ global currencies with real-time exchange rates.
+            </p>
+          </motion.div>
+        </div>
+      </header>
+
+      <main className="max-w-3xl mx-auto px-6 pb-20 relative z-10">
+        {loading ? (
+          <div className="flex flex-col flex-1 items-center justify-center p-20">
+             <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+             >
+                <RefreshCcw className="w-12 h-12 text-brand-500" />
+             </motion.div>
+          </div>
+        ) : (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="p-8 md:p-12 rounded-[2.5rem] bg-white border border-brand-100 shadow-2xl shadow-brand-900/10"
+          >
+            <div className="flex flex-col gap-6">
+              {/* From Section */}
+              <div className="flex flex-col md:flex-row gap-4 items-center">
+                <div className="w-full md:flex-1 relative group">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 pl-2">Amount</label>
+                  <div className="relative">
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
+                      <span className="text-lg font-medium">{fromCurrency.symbol}</span>
+                    </div>
+                    <input
+                      type="number"
+                      value={fromAmount}
+                      onChange={(e) => setFromAmount(e.target.value)}
+                      className="w-full pl-10 pr-4 py-5 bg-gray-50 border border-gray-100 rounded-2xl text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all text-gray-900"
+                    />
+                  </div>
+                </div>
+                <div className="w-full md:w-auto">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 pl-2 hidden md:block">&nbsp;</label>
+                    <CurrencySelector 
+                      selectedCode={fromCurrencyCode} 
+                      onSelect={setFromCurrencyCode} 
+                    />
+                </div>
+              </div>
+
+              {/* Swap Button */}
+              <div className="flex justify-center -my-2 relative z-10">
+                <button 
+                  onClick={handleSwap}
+                  className="w-12 h-12 rounded-full bg-white border border-gray-100 flex items-center justify-center text-brand-500 hover:text-white hover:bg-brand-500 hover:border-brand-500 hover:scale-110 shadow-lg shadow-brand-500/10 transition-all"
+                >
+                  <ArrowRightLeft className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* To Section */}
+              <div className="flex flex-col md:flex-row gap-4 items-center">
+                <div className="w-full md:flex-1 relative group">
+                  <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 pl-2">Converted</label>
+                  <div className="relative">
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-brand-600">
+                      <span className="text-lg font-medium">{toCurrency.symbol}</span>
+                    </div>
+                    <div className="w-full pl-10 pr-4 py-5 bg-brand-50/50 border border-brand-100 rounded-2xl text-2xl font-bold text-brand-700 overflow-hidden text-ellipsis whitespace-nowrap">
+                      {convertedAmount.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}
+                    </div>
+                  </div>
+                </div>
+                <div className="w-full md:w-auto">
+                    <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 pl-2 hidden md:block">&nbsp;</label>
+                    <CurrencySelector 
+                      selectedCode={toCurrencyCode} 
+                      onSelect={setToCurrencyCode} 
+                    />
+                </div>
+              </div>
+            </div>
+
+            {/* Exchange Rate Info */}
+            <div className="mt-8 p-6 rounded-2xl bg-gray-50 border border-gray-100 text-center flex flex-col items-center justify-center">
+              <span className="text-xs text-brand-600 font-bold uppercase tracking-widest mb-2">Live Rate</span>
+              <p className="text-xl font-display font-medium text-gray-900">
+                1 {fromCurrencyCode} = {exchangeRate.toLocaleString(undefined, { maximumFractionDigits: 4 })} {toCurrencyCode}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </main>
+    </div>
+  );
+}
+
+// Sub-component for Currency Selector Dropdown to keep it clean
+function CurrencySelector({ selectedCode, onSelect }: { selectedCode: string, onSelect: (code: string) => void }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const [search, setSearch] = useState('');
+  
+  const selected = useMemo(() => CURRENCIES.find(c => c.code === selectedCode) || CURRENCIES[0], [selectedCode]);
+
+  const filtered = useMemo(() => {
+    const s = search.toLowerCase().trim();
+    if (!s) return CURRENCIES;
+    return CURRENCIES.filter(c => 
+      c.code.toLowerCase().includes(s) || 
+      c.name.toLowerCase().includes(s) ||
+      c.country.toLowerCase().includes(s)
+    );
+  }, [search]);
+
+  return (
+    <div className="relative">
+      <button
+        onClick={() => {
+          setIsOpen(!isOpen);
+          if (!isOpen) setSearch('');
+        }}
+        className="w-full md:w-auto h-[68px] px-6 flex items-center justify-between gap-3 bg-white hover:bg-gray-50 rounded-2xl transition-colors border border-gray-200 min-w-[160px]"
+      >
+        <span className="flex items-center gap-3">
+          <img 
+            src={`https://flagcdn.com/w40/${selected.iso}.png`} 
+            alt={selected.country}
+            className="w-6 h-4 object-cover rounded-sm shadow-sm"
+            referrerPolicy="no-referrer"
+          />
+          <span className="font-bold text-lg text-gray-900">{selected.code}</span>
+        </span>
+        <ChevronDown className={cn("w-4 h-4 text-gray-400 transition-transform", isOpen && "rotate-180")} />
+      </button>
+
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            <div 
+              className="fixed inset-0 z-40" 
+              onClick={() => setIsOpen(false)} 
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              className="absolute right-0 top-full mt-2 w-72 max-h-[360px] overflow-hidden bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-brand-100 z-[100] flex flex-col origin-top-right"
+            >
+              <div className="p-3 border-b border-gray-100 bg-white sticky top-0 z-20">
+                <div className="relative">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-500" />
+                  <input
+                    type="text"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
+                    placeholder="Search currency..."
+                    className="w-full pl-10 pr-3 py-2.5 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
+                    autoFocus
+                  />
+                </div>
+              </div>
+              <div className="flex-1 overflow-y-auto p-2 custom-scrollbar">
+                {filtered.length > 0 ? (
+                  filtered.map((c) => (
+                    <button
+                      key={c.code}
+                      onClick={() => {
+                        onSelect(c.code);
+                        setIsOpen(false);
+                        setSearch('');
+                      }}
+                      className={cn(
+                        "w-full flex items-center justify-between p-3 rounded-xl transition-all text-left mb-1 last:mb-0 group/item",
+                        selectedCode === c.code 
+                          ? "bg-brand-50 text-brand-700 border border-brand-100" 
+                          : "hover:bg-gray-50 border border-transparent hover:border-gray-100"
+                      )}
+                    >
+                      <span className="flex items-center gap-3">
+                        <div className="relative">
+                          <img 
+                            src={`https://flagcdn.com/w40/${c.iso}.png`} 
+                            alt={c.country}
+                            className="w-7 h-5 object-cover rounded shadow-sm border border-gray-100"
+                            referrerPolicy="no-referrer"
+                          />
+                        </div>
+                        <div>
+                          <div className="font-bold text-sm leading-none text-gray-900">{c.code}</div>
+                          <div className="text-[10px] text-gray-500 mt-1 font-medium uppercase tracking-wider">{c.name}</div>
+                        </div>
+                      </span>
+                      {selectedCode === c.code && (
+                        <div className="w-2 h-2 rounded-full bg-brand-500 shadow-[0_0_8px_rgba(20,184,166,0.5)]" />
+                      )}
+                    </button>
+                  ))
+                ) : (
+                  <div className="py-8 px-4 text-center text-gray-400 text-sm">
+                    No currencies found
+                  </div>
+                )}
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}

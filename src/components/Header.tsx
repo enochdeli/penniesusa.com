@@ -9,6 +9,7 @@ export default function Header() {
 
   const navItems = [
     { name: 'Global Explorer', path: '/' },
+    { name: 'Converter', path: '/converter' },
     { name: 'Wealth Insights', path: '/insights' },
     { name: 'About', path: '/about' },
   ];
