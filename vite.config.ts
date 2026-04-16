@@ -12,14 +12,18 @@ export default defineConfig(({ mode }) => {
       tailwindcss(),
       VitePWA({
         registerType: 'autoUpdate',
+        devOptions: {
+          enabled: true
+        },
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
         manifest: {
           name: 'penniesusa',
           short_name: 'penniesusa',
           description: 'Discover how far your money goes around the world.',
-          theme_color: '#b87333',
+          theme_color: '#14b8a6',
           background_color: '#fcfaf7',
           display: 'standalone',
+          start_url: '/',
           icons: [
             {
               src: 'https://cdn-icons-png.flaticon.com/512/2489/2489756.png',
