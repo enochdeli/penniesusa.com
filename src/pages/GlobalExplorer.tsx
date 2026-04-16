@@ -705,7 +705,7 @@ export default function GlobalExplorer() {
         {results.length === 0 && !loading && (
           <div className="text-center py-20">
             <Globe2 className="w-16 h-16 text-gray-200 mx-auto mb-4" />
-            <h3 className="text-xl font-serif font-medium text-gray-400">No data available for the selected currency.</h3>
+            <h3 className="text-xl font-display font-medium text-gray-400">No data available for the selected currency.</h3>
           </div>
         )}
 
@@ -800,14 +800,14 @@ export default function GlobalExplorer() {
 
                   {/* Lifestyle Section */}
                   <div className="pt-8 border-t border-gray-100">
-                    <h3 className="text-xl font-serif font-bold text-gray-900 mb-2">Live Like a Millionaire in {selectedResult.currency.country}</h3>
+                    <h3 className="text-xl font-display font-bold text-gray-900 mb-2">Live Like a Millionaire in {selectedResult.currency.country}</h3>
                     <p className="text-sm text-gray-600 italic mb-6 leading-relaxed">
                       "{getLifestyleData(selectedResult.currency.code).culturalInsight}"
                     </p>
                     <div className="grid grid-cols-2 gap-4">
                       {getLifestyleData(selectedResult.currency.code).items.map((item, i) => (
                         <div key={i} className="flex items-center gap-3 p-4 rounded-2xl bg-gray-50 border border-gray-100">
-                          <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-copper-600 shadow-sm">
+                          <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center text-brand-600 shadow-sm">
                             {item.icon === 'Home' && <Home className="w-4 h-4" />}
                             {item.icon === 'Utensils' && <Utensils className="w-4 h-4" />}
                             {item.icon === 'Plane' && <Plane className="w-4 h-4" />}
@@ -855,18 +855,18 @@ export default function GlobalExplorer() {
 
                 <div className="p-8 md:p-12">
                   <div className="mb-8">
-                    <h2 className="text-3xl font-serif font-bold text-[#0a192f] mb-4">{activeFeature.title}</h2>
-                    <div className="w-20 h-1 bg-copper-500 rounded-full" />
+                    <h2 className="text-3xl font-display font-bold text-[#0a192f] mb-4">{activeFeature.title}</h2>
+                    <div className="w-20 h-1 bg-brand-500 rounded-full" />
                   </div>
 
-                  <div className="prose prose-copper max-w-none">
+                  <div className="prose prose-brand max-w-none">
                     {activeFeature.content}
                   </div>
 
                   <div className="mt-12 pt-8 border-t border-gray-100">
                     <button 
                       onClick={() => setActiveFeature(null)}
-                      className="w-full py-4 rounded-2xl bg-[#0a192f] text-white font-bold uppercase tracking-widest text-xs hover:bg-copper-600 transition-colors"
+                      className="w-full py-4 rounded-2xl bg-[#0a192f] text-white font-bold uppercase tracking-widest text-xs hover:bg-brand-600 transition-colors"
                     >
                       Close Details
                     </button>

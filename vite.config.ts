@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => {
         },
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
         manifest: {
-          name: 'penniesusa',
+          name: 'penniesusa v2',
           short_name: 'penniesusa',
           description: 'Discover how far your money goes around the world.',
           theme_color: '#14b8a6',
