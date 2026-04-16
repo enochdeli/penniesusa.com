@@ -38,8 +38,8 @@ export default function GlobalExplorer() {
 
   useEffect(() => {
     async function init() {
-      const fetchedRates = await fetchExchangeRates();
-      setRates(fetchedRates);
+      const data = await fetchExchangeRates();
+      setRates(data ? data.rates : null);
       setLoading(false);
     }
     init();

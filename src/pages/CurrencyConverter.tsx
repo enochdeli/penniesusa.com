@@ -12,12 +12,16 @@ export default function CurrencyConverter() {
   const [toCurrencyCode, setToCurrencyCode] = useState<string>('MXN');
   
   const [rates, setRates] = useState<ExchangeRates | null>(null);
+  const [lastUpdated, setLastUpdated] = useState<string | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function init() {
-      const fetchedRates = await fetchExchangeRates();
-      setRates(fetchedRates);
+      const data = await fetchExchangeRates();
+      if (data) {
+        setRates(data.rates);
+        setLastUpdated(data.lastUpdated);
+      }
       setLoading(false);
     }
     init();
@@ -48,6 +52,25 @@ export default function CurrencyConverter() {
   const handleSwap = () => {
     setFromCurrencyCode(toCurrencyCode);
     setToCurrencyCode(fromCurrencyCode);
+  };
+
+  const formatConverterValue = (val: number) => {
+    if (val === 0) return "0.00";
+    const absVal = Math.abs(val);
+    if (absVal < 0.01) {
+      return val.toLocaleString(undefined, { maximumSignificantDigits: 4 });
+    }
+    return val.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 });
+  };
+
+  const formatRateValue = (rate: number) => {
+    if (rate === 0) return "0.00";
+    if (rate < 0.01) {
+      return rate.toLocaleString(undefined, { maximumSignificantDigits: 5 });
+    } else if (rate < 1) {
+      return rate.toLocaleString(undefined, { maximumFractionDigits: 6, minimumFractionDigits: 4 });
+    }
+    return rate.toLocaleString(undefined, { maximumFractionDigits: 4, minimumFractionDigits: 2 });
   };
 
   return (
@@ -107,6 +130,7 @@ export default function CurrencyConverter() {
                     </div>
                     <input
                       type="number"
+                      step="any"
                       value={fromAmount}
                       onChange={(e) => setFromAmount(e.target.value)}
                       className="w-full pl-10 pr-4 py-5 bg-gray-50 border border-gray-100 rounded-2xl text-2xl font-bold focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all text-gray-900"
@@ -141,7 +165,7 @@ export default function CurrencyConverter() {
                       <span className="text-lg font-medium">{toCurrency.symbol}</span>
                     </div>
                     <div className="w-full pl-10 pr-4 py-5 bg-brand-50/50 border border-brand-100 rounded-2xl text-2xl font-bold text-brand-700 overflow-hidden text-ellipsis whitespace-nowrap">
-                      {convertedAmount.toLocaleString(undefined, { maximumFractionDigits: 2, minimumFractionDigits: 2 })}
+                      {formatConverterValue(convertedAmount)}
                     </div>
                   </div>
                 </div>
@@ -156,11 +180,16 @@ export default function CurrencyConverter() {
             </div>
 
             {/* Exchange Rate Info */}
-            <div className="mt-8 p-6 rounded-2xl bg-gray-50 border border-gray-100 text-center flex flex-col items-center justify-center">
+            <div className="mt-8 p-6 rounded-2xl bg-gray-50 border border-gray-100 text-center flex flex-col items-center justify-center relative">
               <span className="text-xs text-brand-600 font-bold uppercase tracking-widest mb-2">Live Rate</span>
-              <p className="text-xl font-display font-medium text-gray-900">
-                1 {fromCurrencyCode} = {exchangeRate.toLocaleString(undefined, { maximumFractionDigits: 4 })} {toCurrencyCode}
+              <p className="text-xl font-display font-medium text-gray-900 mb-2">
+                1 {fromCurrencyCode} = {formatRateValue(exchangeRate)} {toCurrencyCode}
               </p>
+              {lastUpdated && (
+                <p className="text-[10px] text-gray-400 font-medium uppercase tracking-widest mt-1">
+                  Last Updated: {new Date(lastUpdated).toLocaleString()}
+                </p>
+              )}
             </div>
           </motion.div>
         )}
