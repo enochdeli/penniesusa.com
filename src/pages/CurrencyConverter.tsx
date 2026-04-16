@@ -5,8 +5,11 @@ import { CURRENCIES } from '../constants';
 import { fetchExchangeRates } from '../services/currencyService';
 import { ExchangeRates } from '../types';
 import { cn } from '../lib/utils';
+import { useAuth } from '../AuthContext';
 
 export default function CurrencyConverter() {
+  const { preferences, updatePreferences, isAuthReady } = useAuth();
+
   const [fromAmount, setFromAmount] = useState<string>('1000');
   const [fromCurrencyCode, setFromCurrencyCode] = useState<string>('USD');
   const [toCurrencyCode, setToCurrencyCode] = useState<string>('MXN');
@@ -26,6 +29,22 @@ export default function CurrencyConverter() {
     }
     init();
   }, []);
+
+  // Sync with user preferences once auth is ready
+  useEffect(() => {
+    if (isAuthReady && preferences) {
+      if (preferences.baseCurrency && preferences.baseCurrency !== fromCurrencyCode) {
+        setFromCurrencyCode(preferences.baseCurrency);
+      }
+    }
+  }, [isAuthReady, preferences]);
+
+  const handleFromCurrencySelect = async (code: string) => {
+      setFromCurrencyCode(code);
+      if (isAuthReady && preferences) {
+         await updatePreferences({ baseCurrency: code });
+      }
+  };
 
   const fromCurrency = useMemo(() => 
     CURRENCIES.find(c => c.code === fromCurrencyCode) || CURRENCIES[0],
@@ -141,7 +160,7 @@ export default function CurrencyConverter() {
                     <label className="block text-xs font-bold uppercase tracking-wider text-gray-400 mb-2 pl-2 hidden md:block">&nbsp;</label>
                     <CurrencySelector 
                       selectedCode={fromCurrencyCode} 
-                      onSelect={setFromCurrencyCode} 
+                      onSelect={handleFromCurrencySelect} 
                     />
                 </div>
               </div>

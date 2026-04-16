@@ -1,0 +1,50 @@
+{
+  "entities": {
+    "UserPreferences": {
+      "title": "User Preferences",
+      "description": "User specific preferences and stored data",
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string",
+          "description": "The user's auth UID"
+        },
+        "email": {
+          "type": "string",
+          "description": "User's email"
+        },
+        "baseCurrency": {
+          "type": "string",
+          "description": "Preferred base currency code"
+        },
+        "netWorth": {
+          "type": "number",
+          "description": "User's stored net worth"
+        },
+        "searchHistory": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of searched country or currency codes"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "userId",
+        "email"
+      ]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": {
+        "$ref": "#/entities/UserPreferences"
+      },
+      "description": "User profile document containing preferences"
+    }
+  }
+}

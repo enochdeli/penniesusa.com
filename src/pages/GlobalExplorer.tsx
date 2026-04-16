@@ -24,8 +24,12 @@ import { fetchExchangeRates } from '../services/currencyService';
 import { ExchangeRates, MillionaireResult } from '../types';
 import { cn } from '../lib/utils';
 import { getLifestyleData } from '../lifestyleData';
+import { useAuth } from '../AuthContext';
 
 export default function GlobalExplorer() {
+  const { preferences, updatePreferences, isAuthReady } = useAuth();
+  
+  // Local state falls back to preferences or defaults
   const [amount, setAmount] = useState<string>('');
   const [baseCurrencyCode, setBaseCurrencyCode] = useState<string>('USD');
   const [rates, setRates] = useState<ExchangeRates | null>(null);
@@ -44,6 +48,38 @@ export default function GlobalExplorer() {
     }
     init();
   }, []);
+
+  // Sync with user preferences once auth is ready
+  useEffect(() => {
+    if (isAuthReady && preferences) {
+      if (preferences.baseCurrency && preferences.baseCurrency !== baseCurrencyCode) {
+        setBaseCurrencyCode(preferences.baseCurrency);
+      }
+      if (preferences.netWorth && !amount) {
+         setAmount(preferences.netWorth.toString());
+      }
+    }
+  }, [isAuthReady, preferences]);
+
+  const handleCurrencyChange = async (code: string) => {
+    setBaseCurrencyCode(code);
+    setIsCurrencyDropdownOpen(false);
+    setCurrencySearch('');
+    
+    // Save to user profile if logged in
+    if (isAuthReady && preferences) {
+      await updatePreferences({ baseCurrency: code });
+    }
+  };
+
+  const handleSearchCheck = async () => {
+    document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
+    
+    // Save net worth preference
+    if (isAuthReady && preferences && amount) {
+      await updatePreferences({ netWorth: parseFloat(amount) });
+    }
+  };
 
   const baseCurrency = useMemo(() => 
     CURRENCIES.find(c => c.code === baseCurrencyCode) || CURRENCIES[0],
@@ -217,11 +253,7 @@ export default function GlobalExplorer() {
                               filteredCurrencies.map((c) => (
                                 <button
                                   key={c.code}
-                                  onClick={() => {
-                                    setBaseCurrencyCode(c.code);
-                                    setIsCurrencyDropdownOpen(false);
-                                    setCurrencySearch('');
-                                  }}
+                                  onClick={() => handleCurrencyChange(c.code)}
                                   className={cn(
                                     "w-full flex items-center justify-between p-3 rounded-xl transition-all text-left mb-1 last:mb-0 group/item",
                                     baseCurrencyCode === c.code 
@@ -265,13 +297,13 @@ export default function GlobalExplorer() {
               </div>
               <div className="relative z-10 mt-6 flex flex-col items-center gap-4">
                 <button 
-                  onClick={() => document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={handleSearchCheck}
                   className="px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-500 text-white text-lg font-bold hover:from-brand-700 hover:to-brand-600 transition-all shadow-xl shadow-brand-900/20 active:scale-95 cursor-pointer"
                 >
                   Check My Status
                 </button>
                 <p className="text-xs text-gray-400 font-medium tracking-wide">
-                  Takes 2 seconds • No signup required
+                  Takes 2 seconds • Saves automatically if connected
                 </p>
               </div>
             </div>

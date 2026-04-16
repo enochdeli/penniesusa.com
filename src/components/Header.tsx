@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Coins, Menu, X } from 'lucide-react';
+import { Coins, Menu, X, LogOut, User } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
+import { useAuth } from '../AuthContext';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { user, signIn, logOut, isAuthReady } = useAuth();
 
   const navItems = [
     { name: 'Global Explorer', path: '/' },
@@ -46,9 +48,32 @@ export default function Header() {
               {item.name}
             </NavLink>
           ))}
-          <button className="px-8 py-3 rounded-full bg-[#0a192f] text-white text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-brand-600 transition-all duration-300 shadow-xl shadow-navy-900/10 active:scale-95">
-            Connect
-          </button>
+          {isAuthReady && user ? (
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-2 group">
+                {user.photoURL ? (
+                  <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-gray-200" referrerPolicy="no-referrer" />
+                ) : (
+                  <div className="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center text-brand-700">
+                    <User className="w-4 h-4" />
+                  </div>
+                )}
+              </div>
+              <button 
+                onClick={logOut}
+                className="text-gray-400 hover:text-gray-900 transition-colors p-2"
+                title="Sign Out"
+              >
+                <LogOut className="w-4 h-4" />
+              </button>
+            </div>
+          ) : (
+            <button 
+              onClick={signIn}
+              className="px-8 py-3 rounded-full bg-[#0a192f] text-white text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-brand-600 transition-all duration-300 shadow-xl shadow-navy-900/10 active:scale-95">
+              Connect
+            </button>
+          )}
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -83,9 +108,34 @@ export default function Header() {
                   {item.name}
                 </NavLink>
               ))}
-              <button className="w-full py-4 rounded-xl bg-[#0a192f] text-white text-sm font-bold uppercase tracking-[0.2em] hover:bg-brand-600 transition-colors">
-                Connect
-              </button>
+              {isAuthReady && user ? (
+                <div className="flex flex-col gap-4 mt-4 pt-4 border-t border-gray-100">
+                  <div className="flex items-center gap-3">
+                     {user.photoURL ? (
+                        <img src={user.photoURL} alt="Profile" className="w-10 h-10 rounded-full border border-gray-200" referrerPolicy="no-referrer" />
+                      ) : (
+                        <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-700">
+                          <User className="w-5 h-5" />
+                        </div>
+                      )}
+                      <div className="flex flex-col">
+                        <span className="text-sm font-bold text-gray-900">{user.displayName || 'User'}</span>
+                        <span className="text-xs text-gray-500 truncate max-w-[200px]">{user.email}</span>
+                      </div>
+                  </div>
+                  <button 
+                    onClick={() => { logOut(); setIsMobileMenuOpen(false); }}
+                    className="w-full py-4 rounded-xl border border-gray-200 text-gray-700 text-sm font-bold uppercase tracking-[0.2em] hover:bg-gray-50 flex items-center justify-center gap-2 transition-colors">
+                    <LogOut className="w-4 h-4" /> Sign Out
+                  </button>
+                </div>
+              ) : (
+                <button 
+                  onClick={() => { signIn(); setIsMobileMenuOpen(false); }}
+                  className="w-full py-4 rounded-xl bg-[#0a192f] text-white text-sm font-bold uppercase tracking-[0.2em] hover:bg-brand-600 transition-colors">
+                  Connect
+                </button>
+              )}
             </div>
           </motion.div>
         )}

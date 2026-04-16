@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { AuthProvider } from './AuthContext';
 import Layout from './components/Layout';
 import GlobalExplorer from './pages/GlobalExplorer';
 import WealthInsights from './pages/WealthInsights';
@@ -18,16 +19,18 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <Router>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<GlobalExplorer />} />
-          <Route path="insights" element={<WealthInsights />} />
-          <Route path="converter" element={<CurrencyConverter />} />
-          <Route path="about" element={<About />} />
-        </Route>
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<GlobalExplorer />} />
+            <Route path="insights" element={<WealthInsights />} />
+            <Route path="converter" element={<CurrencyConverter />} />
+            <Route path="about" element={<About />} />
+          </Route>
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
