@@ -108,7 +108,7 @@ export default function GlobalExplorer() {
           animate={{ rotate: 360 }}
           transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
         >
-          <Coins className="w-12 h-12 text-[#b87333]" />
+          <Coins className="w-12 h-12 text-brand-500" />
         </motion.div>
       </div>
     );
@@ -120,8 +120,8 @@ export default function GlobalExplorer() {
       <header className="relative pt-20 pb-16 px-6">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full">
-            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-copper-100/30 blur-[120px] rounded-full" />
-            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-copper-100/30 blur-[120px] rounded-full" />
+            <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-brand-100/30 blur-[120px] rounded-full" />
+            <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-brand-100/30 blur-[120px] rounded-full" />
           </div>
         </div>
 
@@ -131,11 +131,11 @@ export default function GlobalExplorer() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-copper-100 text-copper-800 text-xs font-semibold tracking-widest uppercase mb-6 border border-copper-200">
+            <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-100 text-brand-800 text-xs font-semibold tracking-widest uppercase mb-6 border border-brand-200">
               Global Wealth Perspective
             </span>
-            <h1 className="text-5xl md:text-7xl font-serif font-medium tracking-tight text-[#0a192f] mb-6">
-              Where Are You a <span className="text-copper-600 italic">Millionaire? 🌍</span>
+            <h1 className="text-5xl md:text-7xl font-display font-black tracking-tight text-[#0a192f] mb-6">
+              Where Are You a <span className="text-brand-600 italic">Millionaire? 🌍</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
               Discover how far your money really goes around the world.
@@ -150,8 +150,8 @@ export default function GlobalExplorer() {
             className="mt-12 max-w-xl mx-auto"
           >
             <div className="relative group">
-              <div className="absolute inset-0 bg-copper-500/5 blur-2xl group-focus-within:bg-copper-500/10 transition-colors rounded-3xl pointer-events-none" />
-              <div className="relative flex flex-col md:flex-row items-stretch gap-2 p-2 bg-white rounded-2xl shadow-xl shadow-copper-900/5 border border-copper-100">
+              <div className="absolute inset-0 bg-brand-500/5 blur-2xl group-focus-within:bg-brand-500/10 transition-colors rounded-3xl pointer-events-none" />
+              <div className="relative flex flex-col md:flex-row items-stretch gap-2 p-2 bg-white rounded-2xl shadow-xl shadow-brand-900/5 border border-brand-100">
                 <div className="relative flex-1">
                   <div className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400">
                     <span className="text-lg font-medium">{baseCurrency.symbol}</span>
@@ -197,17 +197,17 @@ export default function GlobalExplorer() {
                           initial={{ opacity: 0, scale: 0.95, y: 10 }}
                           animate={{ opacity: 1, scale: 1, y: 0 }}
                           exit={{ opacity: 0, scale: 0.95, y: 10 }}
-                          className="absolute right-0 top-full mt-2 w-72 max-h-[400px] overflow-hidden bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-copper-100 z-[100] flex flex-col"
+                          className="absolute right-0 top-full mt-2 w-72 max-h-[400px] overflow-hidden bg-white rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] border border-brand-100 z-[100] flex flex-col"
                         >
                           <div className="p-3 border-b border-gray-100 bg-white sticky top-0 z-20">
                             <div className="relative">
-                              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-copper-500" />
+                              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-brand-500" />
                               <input
                                 type="text"
                                 value={currencySearch}
                                 onChange={(e) => setCurrencySearch(e.target.value)}
                                 placeholder="Search by name, code or country..."
-                                className="w-full pl-10 pr-3 py-2.5 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-copper-500/20 focus:border-copper-500 transition-all"
+                                className="w-full pl-10 pr-3 py-2.5 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-500/20 focus:border-brand-500 transition-all"
                                 autoFocus
                               />
                             </div>
@@ -225,7 +225,7 @@ export default function GlobalExplorer() {
                                   className={cn(
                                     "w-full flex items-center justify-between p-3 rounded-xl transition-all text-left mb-1 last:mb-0 group/item",
                                     baseCurrencyCode === c.code 
-                                      ? "bg-copper-50 text-copper-700 border border-copper-100" 
+                                      ? "bg-brand-50 text-brand-700 border border-brand-100" 
                                       : "hover:bg-gray-50 border border-transparent hover:border-gray-100"
                                   )}
                                 >
@@ -244,7 +244,7 @@ export default function GlobalExplorer() {
                                     </div>
                                   </span>
                                   {baseCurrencyCode === c.code ? (
-                                    <div className="w-2 h-2 rounded-full bg-copper-500 shadow-[0_0_8px_rgba(184,115,51,0.5)]" />
+                                    <div className="w-2 h-2 rounded-full bg-brand-500 shadow-[0_0_8px_rgba(20,184,166,0.5)]" />
                                   ) : (
                                     <ArrowRight className="w-3 h-3 text-gray-300 opacity-0 group-hover/item:opacity-100 transition-opacity" />
                                   )}
@@ -266,7 +266,7 @@ export default function GlobalExplorer() {
               <div className="relative z-10 mt-6 flex flex-col items-center gap-4">
                 <button 
                   onClick={() => document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="px-8 py-4 rounded-2xl bg-[#0a192f] text-white text-lg font-bold hover:bg-copper-600 transition-all shadow-xl shadow-navy-900/20 active:scale-95 cursor-pointer"
+                  className="px-8 py-4 rounded-2xl bg-gradient-to-r from-brand-600 to-brand-500 text-white text-lg font-bold hover:from-brand-700 hover:to-brand-600 transition-all shadow-xl shadow-brand-900/20 active:scale-95 cursor-pointer"
                 >
                   Check My Status
                 </button>
@@ -285,33 +285,33 @@ export default function GlobalExplorer() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="flex flex-wrap items-center justify-center gap-8 py-8 border-y border-copper-200/50"
+          className="flex flex-wrap items-center justify-center gap-8 py-8 border-y border-brand-200/50"
         >
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-copper-100 flex items-center justify-center text-copper-600">
+            <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-600">
               <Globe2 className="w-5 h-5" />
             </div>
             <div>
               <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Countries Scanned</div>
-              <div className="text-xl font-serif font-semibold">{results.length}</div>
+              <div className="text-xl font-display font-bold">{results.length}</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-copper-100 flex items-center justify-center text-copper-600">
+            <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-600">
               <TrendingUp className="w-5 h-5" />
             </div>
             <div>
               <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Millionaire Status</div>
-              <div className="text-xl font-serif font-semibold">{millionaireCount} Countries</div>
+              <div className="text-xl font-display font-bold">{millionaireCount} Countries</div>
             </div>
           </div>
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-copper-100 flex items-center justify-center text-copper-600">
+            <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-600">
               <Coins className="w-5 h-5" />
             </div>
             <div>
               <div className="text-xs text-gray-500 uppercase tracking-wider font-semibold">Base Currency</div>
-              <div className="text-xl font-serif font-semibold">{baseCurrency.name}</div>
+              <div className="text-xl font-display font-bold">{baseCurrency.name}</div>
             </div>
           </div>
         </motion.div>
@@ -325,9 +325,9 @@ export default function GlobalExplorer() {
               initial={{ opacity: 0, scale: 0.95, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: -20 }}
-              className="relative p-8 md:p-12 rounded-[2.5rem] bg-white border border-copper-100 shadow-2xl shadow-copper-900/10 overflow-hidden"
+              className="relative p-8 md:p-12 rounded-[2.5rem] bg-white border border-brand-100 shadow-2xl shadow-brand-900/10 overflow-hidden"
             >
-              <div className="absolute top-0 right-0 w-64 h-64 bg-copper-50/50 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+              <div className="absolute top-0 right-0 w-64 h-64 bg-brand-50/50 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
               
               <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
@@ -336,8 +336,8 @@ export default function GlobalExplorer() {
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 }}
                   >
-                    <h2 className="text-4xl md:text-6xl font-serif font-medium text-[#0a192f] leading-tight mb-4">
-                      You are a <span className="text-copper-600 italic">MILLIONAIRE</span> in <span className="underline decoration-copper-300 underline-offset-8">{millionaireCount}</span> countries 💰
+                    <h2 className="text-4xl md:text-6xl font-display font-black text-[#0a192f] leading-tight mb-4">
+                      You are a <span className="text-brand-600 italic">MILLIONAIRE</span> in <span className="underline decoration-brand-300 underline-offset-8">{millionaireCount}</span> countries 💰
                     </h2>
                     <p className="text-lg text-gray-500 font-light">
                       Your current net worth of {baseCurrency.symbol}{parseFloat(amount).toLocaleString()} {baseCurrency.code} grants you extraordinary status across the globe.
@@ -351,7 +351,7 @@ export default function GlobalExplorer() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.3 }}
-                      className="p-6 rounded-3xl bg-gray-50 border border-gray-100 group hover:border-copper-200 transition-colors"
+                      className="p-6 rounded-3xl bg-gray-50 border border-gray-100 group hover:border-brand-200 transition-colors"
                     >
                       <div className="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-4">Closest Milestone</div>
                       <div className="flex items-center gap-3 mb-3">
@@ -361,10 +361,10 @@ export default function GlobalExplorer() {
                           className="w-8 h-5 object-cover rounded shadow-sm"
                           referrerPolicy="no-referrer"
                         />
-                        <span className="font-serif font-bold text-gray-900">{closestCountry.currency.country}</span>
+                        <span className="font-display font-bold text-gray-900">{closestCountry.currency.country}</span>
                       </div>
                       <div className="text-sm text-gray-600">
-                        You need <span className="font-bold text-copper-600">{baseCurrency.symbol}{Math.ceil(closestCountry.valueForOneMillion - parseFloat(amount)).toLocaleString()}</span> more to be a millionaire here.
+                        You need <span className="font-bold text-brand-600">{baseCurrency.symbol}{Math.ceil(closestCountry.valueForOneMillion - parseFloat(amount)).toLocaleString()}</span> more to be a millionaire here.
                       </div>
                     </motion.div>
                   )}
@@ -374,9 +374,9 @@ export default function GlobalExplorer() {
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.4 }}
-                      className="p-6 rounded-3xl bg-copper-50/30 border border-copper-100 group hover:border-copper-300 transition-colors"
+                      className="p-6 rounded-3xl bg-brand-50/30 border border-brand-100 group hover:border-brand-300 transition-colors"
                     >
-                      <div className="text-[10px] text-copper-500 uppercase tracking-widest font-bold mb-4">Maximum Power</div>
+                      <div className="text-[10px] text-brand-500 uppercase tracking-widest font-bold mb-4">Maximum Power</div>
                       <div className="flex items-center gap-3 mb-3">
                         <img 
                           src={`https://flagcdn.com/w40/${furthestCountry.currency.iso}.png`} 
@@ -384,10 +384,10 @@ export default function GlobalExplorer() {
                           className="w-8 h-5 object-cover rounded shadow-sm"
                           referrerPolicy="no-referrer"
                         />
-                        <span className="font-serif font-bold text-gray-900">{furthestCountry.currency.country}</span>
+                        <span className="font-display font-bold text-gray-900">{furthestCountry.currency.country}</span>
                       </div>
                       <div className="text-sm text-gray-600">
-                        Your money goes furthest in <span className="font-bold text-copper-600">{furthestCountry.currency.country}</span>, where you are worth <span className="font-bold text-copper-600">{furthestCountry.currency.symbol}{furthestCountry.localAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>.
+                        Your money goes furthest in <span className="font-bold text-brand-600">{furthestCountry.currency.country}</span>, where you are worth <span className="font-bold text-brand-600">{furthestCountry.currency.symbol}{furthestCountry.localAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })}</span>.
                       </div>
                     </motion.div>
                   )}
@@ -407,13 +407,13 @@ export default function GlobalExplorer() {
             exit={{ opacity: 0, y: 10 }}
             className="max-w-7xl mx-auto px-6 mb-16"
           >
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-6 rounded-3xl bg-copper-50/20 border border-copper-100/50">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6 p-6 rounded-3xl bg-brand-50/20 border border-brand-100/50">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-white border border-copper-100 flex items-center justify-center text-copper-600 shadow-sm">
+                <div className="w-12 h-12 rounded-2xl bg-white border border-brand-100 flex items-center justify-center text-brand-600 shadow-sm">
                   <Share2 className="w-6 h-6" />
                 </div>
                 <div>
-                  <h4 className="font-serif font-bold text-gray-900 italic">Share your global status</h4>
+                  <h4 className="font-display font-bold text-gray-900 italic text-lg">Share your global status</h4>
                   <p className="text-xs text-gray-500 font-medium uppercase tracking-widest">Let the world know your worth</p>
                 </div>
               </div>
@@ -426,9 +426,9 @@ export default function GlobalExplorer() {
                     setCopied(true);
                     setTimeout(() => setCopied(false), 2000);
                   }}
-                  className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white border border-gray-100 hover:border-copper-300 transition-all shadow-sm text-sm font-bold text-gray-700 group"
+                  className="flex items-center gap-2 px-5 py-3 rounded-2xl bg-white border border-gray-100 hover:border-brand-300 transition-all shadow-sm text-sm font-bold text-gray-700 group"
                 >
-                  {copied ? <Check className="w-4 h-4 text-green-500" /> : <Link className="w-4 h-4 text-copper-500 group-hover:scale-110 transition-transform" />}
+                  {copied ? <Check className="w-4 h-4 text-green-500" /> : <Link className="w-4 h-4 text-brand-500 group-hover:scale-110 transition-transform" />}
                   {copied ? 'Copied!' : 'Copy Link'}
                 </button>
 
@@ -499,13 +499,13 @@ export default function GlobalExplorer() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.1 }}
-              className="p-8 rounded-[2rem] bg-white border border-copper-100/50 hover:border-copper-300 transition-all duration-500 group flex flex-col justify-between"
+              className="p-8 rounded-[2rem] bg-white border border-brand-100/50 hover:border-brand-300 transition-all duration-500 group flex flex-col justify-between"
             >
               <div>
-                <div className="w-10 h-10 rounded-xl bg-copper-50 text-copper-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                <div className="w-10 h-10 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                   {item.icon}
                 </div>
-                <h3 className="text-xl font-serif font-bold text-[#0a192f] mb-3 leading-tight">
+                <h3 className="text-xl font-display font-bold text-[#0a192f] mb-3 leading-tight">
                   {item.title}
                 </h3>
                 <p className="text-sm text-gray-500 font-light leading-relaxed mb-8">
@@ -518,15 +518,15 @@ export default function GlobalExplorer() {
                   const content = {
                     "Grow your wealth globally.": (
                       <div className="space-y-6">
-                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
+                        <div className="p-6 rounded-2xl bg-brand-50/30 border border-brand-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Offshore Banking</h4>
                           <p className="text-sm text-gray-600">Diversify your holdings in stable, high-privacy jurisdictions to protect your capital from local volatility.</p>
                         </div>
-                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
+                        <div className="p-6 rounded-2xl bg-brand-50/30 border border-brand-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Emerging Market Real Estate</h4>
                           <p className="text-sm text-gray-600">Invest in high-growth economies like Thailand or Mexico where property appreciation and rental yields often outpace Western markets.</p>
                         </div>
-                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
+                        <div className="p-6 rounded-2xl bg-brand-50/30 border border-brand-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Global Index Funds</h4>
                           <p className="text-sm text-gray-600">Broaden your portfolio beyond domestic stocks to capture the growth of the entire global economy.</p>
                         </div>
@@ -534,15 +534,15 @@ export default function GlobalExplorer() {
                     ),
                     "Track your net worth.": (
                       <div className="space-y-6">
-                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
+                        <div className="p-6 rounded-2xl bg-brand-50/30 border border-brand-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Multi-Currency Dashboard</h4>
                           <p className="text-sm text-gray-600">Monitor your assets across 130+ currencies in real-time. See your total wealth consolidated into your base currency instantly.</p>
                         </div>
-                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
+                        <div className="p-6 rounded-2xl bg-brand-50/30 border border-brand-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Purchasing Power Tracking</h4>
                           <p className="text-sm text-gray-600">Don't just track numbers; track what they can buy. See how your lifestyle potential changes as exchange rates fluctuate.</p>
                         </div>
-                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
+                        <div className="p-6 rounded-2xl bg-brand-50/30 border border-brand-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Asset Allocation Insights</h4>
                           <p className="text-sm text-gray-600">Visualize your global footprint and identify where you are over-exposed or under-invested.</p>
                         </div>
@@ -550,15 +550,15 @@ export default function GlobalExplorer() {
                     ),
                     "Live like a millionaire abroad.": (
                       <div className="space-y-6">
-                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
+                        <div className="p-6 rounded-2xl bg-brand-50/30 border border-brand-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Value-Luxury Destinations</h4>
                           <p className="text-sm text-gray-600">Discover countries where $1,000/month buys a penthouse and a private chef. We curate the best balance of safety, infrastructure, and cost.</p>
                         </div>
-                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
+                        <div className="p-6 rounded-2xl bg-brand-50/30 border border-brand-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Residency by Investment</h4>
                           <p className="text-sm text-gray-600">Learn about 'Golden Visas' and digital nomad programs that allow you to live a high-end lifestyle in beautiful countries legally and long-term.</p>
                         </div>
-                        <div className="p-6 rounded-2xl bg-copper-50/30 border border-copper-100">
+                        <div className="p-6 rounded-2xl bg-brand-50/30 border border-brand-100">
                           <h4 className="font-bold text-[#0a192f] mb-2">Global Lifestyle Concierge</h4>
                           <p className="text-sm text-gray-600">Access exclusive data on the best neighborhoods, international schools, and luxury amenities in emerging millionaire hubs.</p>
                         </div>
@@ -567,7 +567,7 @@ export default function GlobalExplorer() {
                   }[item.title];
                   setActiveFeature({ title: item.title, content });
                 }}
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gray-50 text-[#0a192f] text-xs font-bold uppercase tracking-widest hover:bg-copper-500 hover:text-white transition-all cursor-pointer"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-gray-50 text-[#0a192f] text-xs font-bold uppercase tracking-widest hover:bg-brand-500 hover:text-white transition-all cursor-pointer"
               >
                 {item.cta}
                 <ArrowRight className="w-3 h-3" />
@@ -580,7 +580,7 @@ export default function GlobalExplorer() {
       {/* How It Works Section */}
       <section className="max-w-7xl mx-auto px-6 mb-20">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-serif font-bold text-[#0a192f]">How It Works</h2>
+          <h2 className="text-3xl font-display font-bold text-[#0a192f]">How It Works</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
           {[
@@ -589,7 +589,7 @@ export default function GlobalExplorer() {
             { step: "03", title: "Discover millionaire status", desc: "Find exactly where you're considered a millionaire today." }
           ].map((item, i) => (
             <div key={i} className="text-center">
-              <div className="text-4xl font-serif italic text-gold-200 mb-4">{item.step}</div>
+              <div className="text-4xl font-display font-black italic text-brand-200 mb-4">{item.step}</div>
               <h4 className="text-lg font-bold text-[#0a192f] mb-2">{item.title}</h4>
               <p className="text-sm text-gray-500 font-light">{item.desc}</p>
             </div>
@@ -600,16 +600,16 @@ export default function GlobalExplorer() {
       {/* Email Capture Section */}
       <section className="max-w-4xl mx-auto px-6 mb-20">
         <div className="p-10 rounded-[2.5rem] bg-[#0a192f] text-white text-center relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-gold-500/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-          <h2 className="text-3xl font-serif font-bold mb-4">Get your global wealth report</h2>
+          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-500/10 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+          <h2 className="text-3xl font-display font-bold mb-4">Get your global wealth report</h2>
           <p className="text-gray-400 mb-8 max-w-md mx-auto">Receive a detailed analysis of your purchasing power and investment opportunities worldwide.</p>
           <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
             <input 
               type="email" 
               placeholder="Enter your email..." 
-              className="flex-1 px-6 py-4 rounded-xl bg-white/10 border border-white/20 focus:outline-none focus:border-gold-500 transition-colors"
+              className="flex-1 px-6 py-4 rounded-xl bg-white/10 border border-white/20 focus:outline-none focus:border-brand-500 transition-colors"
             />
-            <button className="px-8 py-4 rounded-xl bg-gold-500 text-white font-bold hover:bg-gold-600 transition-colors">
+            <button className="px-8 py-4 rounded-xl bg-brand-500 text-white font-bold hover:bg-brand-600 transition-colors">
               Get Report
             </button>
           </div>
@@ -635,7 +635,7 @@ export default function GlobalExplorer() {
                 className={cn(
                   "group relative p-6 rounded-2xl border transition-all duration-500 cursor-pointer",
                   result.isMillionaire 
-                    ? "bg-white border-gold-200 shadow-lg shadow-gold-900/5 ring-1 ring-gold-100 hover:scale-[1.02]" 
+                    ? "bg-white border-brand-200 shadow-lg shadow-brand-900/5 ring-1 ring-brand-100 hover:scale-[1.02]" 
                     : "bg-white/40 border-gray-100 opacity-60 grayscale-[0.5] hover:opacity-100 hover:grayscale-0 hover:scale-[1.02]"
                 )}
               >
@@ -649,7 +649,7 @@ export default function GlobalExplorer() {
                       referrerPolicy="no-referrer"
                     />
                     <div>
-                      <h3 className="font-serif font-bold text-lg leading-tight group-hover:text-copper-700 transition-colors">
+                      <h3 className="font-display font-bold text-lg leading-tight group-hover:text-brand-700 transition-colors">
                         {result.currency.country}
                       </h3>
                       <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">
@@ -659,7 +659,7 @@ export default function GlobalExplorer() {
                   </div>
                   <div className={cn(
                     "px-2 py-1 rounded-md text-[10px] font-bold uppercase tracking-tighter",
-                    result.localAmount >= 1000000 ? "bg-copper-500 text-white shadow-sm" :
+                    result.localAmount >= 1000000 ? "bg-brand-500 text-white shadow-sm" :
                     result.localAmount >= 250000 ? "bg-gray-100 text-gray-600 border border-gray-200" :
                     "bg-gray-50 text-gray-400 border border-gray-100"
                   )}>
@@ -673,8 +673,8 @@ export default function GlobalExplorer() {
                   <div>
                     <div className="text-xs text-gray-400 uppercase tracking-widest font-bold mb-1">Your Worth Here</div>
                     <div className={cn(
-                      "text-2xl font-serif font-bold",
-                      result.isMillionaire ? "text-copper-600" : "text-gray-900"
+                      "text-2xl font-display font-bold",
+                      result.isMillionaire ? "text-brand-600" : "text-gray-900"
                     )}>
                       {result.currency.symbol} {result.localAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                     </div>
@@ -716,7 +716,7 @@ export default function GlobalExplorer() {
               setAmount('');
               window.scrollTo({ top: 0, behavior: 'smooth' });
             }}
-            className="px-10 py-5 rounded-2xl border-2 border-[#0a192f] text-[#0a192f] font-bold text-lg hover:bg-[#0a192f] hover:text-white transition-all active:scale-95"
+            className="px-10 py-5 rounded-2xl border-2 border-[#0a192f] text-[#0a192f] font-bold text-lg hover:bg-brand-600 hover:text-white hover:border-brand-600 transition-all active:scale-95"
           >
             Try another amount
           </button>
@@ -738,7 +738,7 @@ export default function GlobalExplorer() {
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed inset-x-4 bottom-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-[70] w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl border border-copper-100 overflow-hidden"
+              className="fixed inset-x-4 bottom-4 md:inset-auto md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-[70] w-full max-w-2xl bg-white rounded-[2.5rem] shadow-2xl border border-brand-100 overflow-hidden"
             >
               <button 
                 onClick={() => setSelectedResult(null)}
@@ -749,8 +749,8 @@ export default function GlobalExplorer() {
 
               <div className="max-h-[85vh] overflow-y-auto">
                 {/* Header */}
-                <div className="relative h-48 bg-copper-50 flex items-center justify-center overflow-hidden">
-                  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-copper-400 via-transparent to-transparent" />
+                <div className="relative h-48 bg-brand-50 flex items-center justify-center overflow-hidden">
+                  <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-brand-400 via-transparent to-transparent" />
                   <motion.img 
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
@@ -763,15 +763,15 @@ export default function GlobalExplorer() {
 
                 <div className="p-8 md:p-12">
                   <div className="mb-8">
-                    <h2 className="text-4xl font-serif font-bold text-gray-900 mb-2">{selectedResult.currency.country}</h2>
-                    <p className="text-copper-600 font-medium tracking-widest uppercase text-xs">{selectedResult.currency.name}</p>
+                    <h2 className="text-4xl font-display font-bold text-gray-900 mb-2">{selectedResult.currency.country}</h2>
+                    <p className="text-brand-600 font-medium tracking-widest uppercase text-xs">{selectedResult.currency.name}</p>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
                     <div className="space-y-6">
                       <div>
                         <div className="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-2">Local Net Worth</div>
-                        <div className="text-3xl font-serif font-bold text-gray-900">
+                        <div className="text-3xl font-display font-bold text-gray-900">
                           {selectedResult.currency.symbol}{selectedResult.localAmount.toLocaleString(undefined, { maximumFractionDigits: 0 })}
                         </div>
                       </div>
@@ -783,8 +783,8 @@ export default function GlobalExplorer() {
                       </div>
                     </div>
 
-                    <div className="p-6 rounded-3xl bg-copper-50/30 border border-copper-100">
-                      <div className="text-[10px] text-copper-500 uppercase tracking-widest font-bold mb-2">Status Insight</div>
+                    <div className="p-6 rounded-3xl bg-brand-50/30 border border-brand-100">
+                      <div className="text-[10px] text-brand-500 uppercase tracking-widest font-bold mb-2">Status Insight</div>
                       <div className="text-gray-700 font-medium mb-4">
                         {selectedResult.isMillionaire 
                           ? "You have achieved elite status in this economy." 
@@ -792,7 +792,7 @@ export default function GlobalExplorer() {
                       </div>
                       {!selectedResult.isMillionaire && (
                         <div className="text-sm text-gray-500">
-                          Gap: <span className="text-copper-600 font-bold">{baseCurrency.symbol}{Math.ceil(selectedResult.valueForOneMillion - parseFloat(amount)).toLocaleString()}</span>
+                          Gap: <span className="text-brand-600 font-bold">{baseCurrency.symbol}{Math.ceil(selectedResult.valueForOneMillion - parseFloat(amount)).toLocaleString()}</span>
                         </div>
                       )}
                     </div>
