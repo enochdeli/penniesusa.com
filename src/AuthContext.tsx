@@ -4,7 +4,10 @@ import {
   signInWithPopup, 
   GoogleAuthProvider, 
   signOut, 
-  User 
+  User,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile
 } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth, db } from './firebase';
@@ -15,7 +18,10 @@ interface AuthContextType {
   preferences: UserPreferences | null;
   isAuthReady: boolean;
   isAdmin: boolean;
-  signIn: () => Promise<void>;
+  isAuthModalOpen: boolean;
+  openAuthModal: () => void;
+  closeAuthModal: () => void;
+  signInWithGoogle: () => Promise<void>;
   logOut: () => Promise<void>;
   updatePreferences: (newPrefs: Partial<UserPreferences>) => Promise<void>;
 }
@@ -26,6 +32,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [preferences, setPreferences] = useState<UserPreferences | null>(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   // enockdelicieux24@gmail.com is automatically a super-admin
   const isAdmin = user?.email === 'enockdelicieux24@gmail.com' || !!preferences?.isAdmin;
@@ -59,15 +66,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return unsubscribe;
   }, []);
 
-  const signIn = async () => {
+  const openAuthModal = () => setIsAuthModalOpen(true);
+  const closeAuthModal = () => setIsAuthModalOpen(false);
+
+  const signInWithGoogle = async () => {
     const provider = new GoogleAuthProvider();
     provider.setCustomParameters({
       prompt: 'select_account'
     });
     try {
       await signInWithPopup(auth, provider);
+      closeAuthModal();
     } catch (error: any) {
-      // Don't log "closed by user" as a fatal error
       if (error.code === 'auth/popup-closed-by-user' || error.code === 'auth/cancelled-popup-request') {
         console.warn('Sign-in popup was closed before completion.');
         return;
@@ -91,15 +101,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const docRef = doc(db, 'users', user.uid);
       let updatedData = { ...preferences, ...newPrefs, updatedAt: new Date().toISOString() };
       
-      // Handle searchHistory append
       if (newPrefs.searchHistory) {
          let history = [...(preferences?.searchHistory || []), ...newPrefs.searchHistory];
-         // Deduplicate
          history = Array.from(new Set(history));
          updatedData.searchHistory = history;
       }
       
-      // Note: setDoc with merge: true prevents overwriting other keys
       await setDoc(docRef, updatedData, { merge: true });
       setPreferences(updatedData as UserPreferences);
     } catch (error) {
@@ -109,7 +116,18 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ user, preferences, isAuthReady, isAdmin, signIn, logOut, updatePreferences }}>
+    <AuthContext.Provider value={{ 
+      user, 
+      preferences, 
+      isAuthReady, 
+      isAdmin, 
+      isAuthModalOpen,
+      openAuthModal,
+      closeAuthModal,
+      signInWithGoogle, 
+      logOut, 
+      updatePreferences 
+    }}>
       {children}
     </AuthContext.Provider>
   );

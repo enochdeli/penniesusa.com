@@ -7,7 +7,7 @@ import { useAuth } from '../AuthContext';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user, signIn, logOut, isAuthReady, isAdmin } = useAuth();
+  const { user, openAuthModal, logOut, isAuthReady, isAdmin } = useAuth();
 
   const navItems = [
     { name: 'Global Explorer', path: '/' },
@@ -77,8 +77,8 @@ export default function Header() {
                 {user.photoURL ? (
                   <img src={user.photoURL} alt="Profile" className="w-8 h-8 rounded-full border border-gray-200" referrerPolicy="no-referrer" />
                 ) : (
-                  <div className="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center text-brand-700">
-                    <User className="w-4 h-4" />
+                  <div className="w-8 h-8 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 font-bold">
+                    {user.displayName ? user.displayName.charAt(0).toUpperCase() : <User className="w-4 h-4" />}
                   </div>
                 )}
               </div>
@@ -92,7 +92,7 @@ export default function Header() {
             </div>
           ) : (
             <button 
-              onClick={signIn}
+              onClick={openAuthModal}
               className="px-8 py-3 rounded-full bg-[#0a192f] text-white text-[11px] font-bold uppercase tracking-[0.2em] hover:bg-brand-600 transition-all duration-300 shadow-xl shadow-navy-900/10 active:scale-95">
               Connect
             </button>
@@ -137,8 +137,8 @@ export default function Header() {
                      {user.photoURL ? (
                         <img src={user.photoURL} alt="Profile" className="w-10 h-10 rounded-full border border-gray-200" referrerPolicy="no-referrer" />
                       ) : (
-                        <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-700">
-                          <User className="w-5 h-5" />
+                        <div className="w-10 h-10 rounded-full bg-brand-100 flex items-center justify-center text-brand-700 font-bold text-lg">
+                          {user.displayName ? user.displayName.charAt(0).toUpperCase() : <User className="w-5 h-5" />}
                         </div>
                       )}
                       <div className="flex flex-col">
@@ -154,7 +154,7 @@ export default function Header() {
                 </div>
               ) : (
                 <button 
-                  onClick={() => { signIn(); setIsMobileMenuOpen(false); }}
+                  onClick={() => { openAuthModal(); setIsMobileMenuOpen(false); }}
                   className="w-full py-4 rounded-xl bg-[#0a192f] text-white text-sm font-bold uppercase tracking-[0.2em] hover:bg-brand-600 transition-colors">
                   Connect
                 </button>
