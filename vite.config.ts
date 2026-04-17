@@ -15,11 +15,11 @@ export default defineConfig(({ mode }) => {
         devOptions: {
           enabled: true
         },
-        includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
+        includeAssets: [],
         manifest: {
-          name: 'PenniesUSA',
-          short_name: 'PenniesUSA',
-          description: 'Discover how far your money goes around the world.',
+          name: 'penniesusa',
+          short_name: 'penniesusa',
+          description: 'Discover your global purchasing power. Convert your net worth into 130+ currencies.',
           theme_color: '#14b8a6',
           background_color: '#fcfaf7',
           display: 'standalone',
@@ -34,12 +34,6 @@ export default defineConfig(({ mode }) => {
               src: 'https://cdn-icons-png.flaticon.com/512/2489/2489756.png',
               sizes: '512x512',
               type: 'image/png'
-            },
-            {
-              src: 'https://cdn-icons-png.flaticon.com/512/2489/2489756.png',
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'any maskable'
             }
           ]
         },
