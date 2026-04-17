@@ -146,14 +146,19 @@ export default function GlobalExplorer() {
         <motion.div 
           animate={{ scale: [1, 1.1, 1] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-          className="w-16 h-16 rounded-2xl overflow-hidden shadow-xl shadow-brand-500/20"
+          className="w-16 h-16 rounded-2xl bg-[#14b8a6] relative flex items-center justify-center shadow-xl shadow-brand-500/20 overflow-hidden"
         >
-          <img 
-            src="https://generativelanguage.googleapis.com/v1beta/files/input_file_0.png" 
-            alt="Loading..."
-            className="w-full h-full object-cover"
-            referrerPolicy="no-referrer"
-          />
+          <div className="relative translate-y-0.5 -translate-x-1.5">
+            <div className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center transform -rotate-12 translate-x-2">
+              <span className="text-[12px] font-bold text-white leading-none">1</span>
+            </div>
+            <div className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center absolute -top-4 left-5 transform rotate-12">
+              <span className="text-[12px] font-bold text-white leading-none">1</span>
+            </div>
+          </div>
+          <div className="absolute top-2.5 right-2.5 w-4 h-4 bg-white rounded-full flex items-center justify-center">
+            <div className="w-2.5 h-2.5 bg-[#14b8a6] rounded-full" />
+          </div>
         </motion.div>
       </div>
     );

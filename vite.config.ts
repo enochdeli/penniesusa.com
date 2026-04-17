@@ -26,18 +26,18 @@ export default defineConfig(({ mode }) => {
           start_url: '/',
           icons: [
             {
-              src: 'https://generativelanguage.googleapis.com/v1beta/files/input_file_0.png',
+              src: 'https://cdn-icons-png.flaticon.com/512/2489/2489756.png',
               sizes: '192x192',
               type: 'image/png'
             },
             {
-              src: 'https://generativelanguage.googleapis.com/v1beta/files/input_file_0.png',
+              src: 'https://cdn-icons-png.flaticon.com/512/2489/2489756.png',
               sizes: '512x512',
               type: 'image/png'
             },
             {
-              src: 'https://generativelanguage.googleapis.com/v1beta/files/input_file_0.png',
-              sizes: '1024x1024',
+              src: 'https://cdn-icons-png.flaticon.com/512/2489/2489756.png',
+              sizes: '512x512',
               type: 'image/png',
               purpose: 'any maskable'
             }
