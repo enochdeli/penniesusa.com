@@ -127,14 +127,22 @@ export default function CurrencyConverter() {
              <motion.div
                 animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                className="w-32 h-32"
+                className="w-24 h-24 rounded-3xl bg-[#14b8a6] relative flex items-center justify-center shadow-2xl shadow-teal-900/20 overflow-hidden"
              >
-                <img 
-                  src="https://generativelanguage.googleapis.com/v1beta/files/input_file_2.png" 
-                  alt="Loading..."
-                  className="w-full h-full object-contain"
-                  referrerPolicy="no-referrer"
-                />
+                <div className="relative translate-y-1 -translate-x-3 scale-150">
+                  {/* Coin 1 */}
+                  <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center transform -rotate-12 translate-x-4 translate-y-1 bg-[#14b8a6]">
+                    <span className="text-[18px] font-black text-white leading-none">1</span>
+                  </div>
+                  {/* Coin 2 */}
+                  <div className="w-10 h-10 rounded-full border-2 border-white flex items-center justify-center absolute -top-8 left-9 transform rotate-12 bg-[#14b8a6] shadow-[-4px_4px_8px_rgba(0,0,0,0.15)]">
+                    <span className="text-[18px] font-black text-white leading-none">1</span>
+                  </div>
+                </div>
+                {/* Brand Accent Dot */}
+                <div className="absolute top-3 right-3 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-md">
+                  <div className="w-3.5 h-3.5 bg-[#14b8a6] rounded-full" />
+                </div>
              </motion.div>
           </div>
         ) : (

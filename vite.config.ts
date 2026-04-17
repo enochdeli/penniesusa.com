@@ -26,14 +26,14 @@ export default defineConfig(({ mode }) => {
           start_url: '/',
           icons: [
             {
-              src: 'https://generativelanguage.googleapis.com/v1beta/files/input_file_2.png',
+              src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2314b8a6'/%3E%3Cg transform='translate(-5, 5) scale(1.1)'%3E%3Ccircle cx='40' cy='60' r='20' fill='%2314b8a6' stroke='white' stroke-width='4'/%3E%3Ctext x='40' y='67' font-family='Arial' font-size='20' font-weight='900' fill='white' text-anchor='middle'%3E1%3C/text%3E%3Ccircle cx='60' cy='40' r='20' fill='%2314b8a6' stroke='white' stroke-width='4'/%3E%3Ctext x='60' y='47' font-family='Arial' font-size='20' font-weight='900' fill='white' text-anchor='middle'%3E1%3C/text%3E%3C/g%3E%3Ccircle cx='85' cy='15' r='10' fill='white'/%3E%3Ccircle cx='85' cy='15' r='5' fill='%2314b8a6'/%3E%3C/svg%3E",
               sizes: '192x192',
-              type: 'image/png'
+              type: 'image/svg+xml'
             },
             {
-              src: 'https://generativelanguage.googleapis.com/v1beta/files/input_file_2.png',
+              src: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%2314b8a6'/%3E%3Cg transform='translate(-5, 5) scale(1.1)'%3E%3Ccircle cx='40' cy='60' r='20' fill='%2314b8a6' stroke='white' stroke-width='4'/%3E%3Ctext x='40' y='67' font-family='Arial' font-size='20' font-weight='900' fill='white' text-anchor='middle'%3E1%3C/text%3E%3Ccircle cx='60' cy='40' r='20' fill='%2314b8a6' stroke='white' stroke-width='4'/%3E%3Ctext x='60' y='47' font-family='Arial' font-size='20' font-weight='900' fill='white' text-anchor='middle'%3E1%3C/text%3E%3C/g%3E%3Ccircle cx='85' cy='15' r='10' fill='white'/%3E%3Ccircle cx='85' cy='15' r='5' fill='%2314b8a6'/%3E%3C/svg%3E",
               sizes: '512x512',
-              type: 'image/png'
+              type: 'image/svg+xml'
             }
           ]
         },

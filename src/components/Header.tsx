@@ -20,13 +20,36 @@ export default function Header() {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-brand-100">
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         {/* Logo */}
-        <NavLink to="/" className="flex items-center group cursor-pointer h-14">
-          <img 
-            src="https://generativelanguage.googleapis.com/v1beta/files/input_file_2.png" 
-            alt="penniesusa" 
-            className="h-full w-auto object-contain transition-transform duration-500 group-hover:scale-105"
-            referrerPolicy="no-referrer"
-          />
+        <NavLink to="/" className="flex items-center gap-3 group cursor-pointer">
+          <div className="relative">
+            {/* Robust CSS/SVG Logo Reconstruction */}
+            <div className="w-10 h-10 rounded-xl bg-[#14b8a6] relative flex items-center justify-center shadow-lg shadow-teal-900/20 group-hover:scale-110 transition-transform duration-500 overflow-hidden">
+              <div className="relative translate-y-0.5 -translate-x-1.5 scale-110">
+                {/* Coin 1 */}
+                <div className="w-5 h-5 rounded-full border-[1.5px] border-white flex items-center justify-center transform -rotate-12 translate-x-2 translate-y-0.5 bg-[#14b8a6]">
+                  <span className="text-[9px] font-black text-white leading-none">1</span>
+                </div>
+                {/* Coin 2 */}
+                <div className="w-5 h-5 rounded-full border-[1.5px] border-white flex items-center justify-center absolute -top-3.5 left-4.5 transform rotate-12 bg-[#14b8a6] shadow-[-2px_2px_4px_rgba(0,0,0,0.1)]">
+                  <span className="text-[9px] font-black text-white leading-none">1</span>
+                </div>
+              </div>
+              {/* Brand Accent Dot */}
+              <div className="absolute top-1 right-1 w-3 h-3 bg-white rounded-full flex items-center justify-center shadow-sm">
+                <div className="w-1.5 h-1.5 bg-[#14b8a6] rounded-full" />
+              </div>
+            </div>
+            
+            {/* Activity Indicator */}
+            <div className="absolute -top-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center shadow-sm">
+              <div className="w-2.5 h-2.5 bg-brand-500 rounded-full animate-pulse" />
+            </div>
+          </div>
+          <div className="flex items-baseline">
+            <span className="font-sans text-2xl font-black tracking-tighter text-[#1e293b]">
+              pennies<span className="text-[#14b8a6]">usa</span>
+            </span>
+          </div>
         </NavLink>
 
         {/* Desktop Menu */}
