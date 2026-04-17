@@ -67,7 +67,12 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     });
     try {
       await signInWithPopup(auth, provider);
-    } catch (error) {
+    } catch (error: any) {
+      // Don't log "closed by user" as a fatal error
+      if (error.code === 'auth/popup-closed-by-user' || error.code === 'auth/cancelled-popup-request') {
+        console.warn('Sign-in popup was closed before completion.');
+        return;
+      }
       console.error('Error signing in:', error);
       throw error;
     }
