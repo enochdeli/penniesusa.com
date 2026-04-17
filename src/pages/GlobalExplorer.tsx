@@ -698,8 +698,13 @@ export default function GlobalExplorer() {
                       referrerPolicy="no-referrer"
                     />
                     <div>
-                      <h3 className="font-display font-bold text-lg leading-tight group-hover:text-brand-700 transition-colors">
+                      <h3 className="font-display font-bold text-lg leading-tight group-hover:text-brand-700 transition-colors flex items-center flex-wrap gap-2">
                         {result.currency.country}
+                        {result.isMillionaire && (
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-black uppercase tracking-tight bg-brand-100 text-brand-700 border border-brand-200">
+                            Millionaire
+                          </span>
+                        )}
                       </h3>
                       <p className="text-xs text-gray-500 font-medium uppercase tracking-wider">
                         {result.currency.name}
