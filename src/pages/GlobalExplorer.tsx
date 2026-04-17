@@ -228,8 +228,9 @@ export default function GlobalExplorer() {
                   >
                     <span className="flex items-center gap-2 font-semibold">
                       <img 
-                        src={`https://flagcdn.com/w40/${baseCurrency.iso}.png`} 
+                        src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/${baseCurrency.iso}.svg`} 
                         alt={baseCurrency.country}
+                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
                         className="w-6 h-4 object-cover rounded-sm shadow-sm"
                         referrerPolicy="no-referrer"
                       />
@@ -281,8 +282,9 @@ export default function GlobalExplorer() {
                                   <span className="flex items-center gap-3">
                                     <div className="relative">
                                       <img 
-                                        src={`https://flagcdn.com/w40/${c.iso}.png`} 
+                                        src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/${c.iso}.svg`} 
                                         alt={c.country}
+                                        onError={(e) => { e.currentTarget.style.display = 'none'; }}
                                         className="w-7 h-5 object-cover rounded shadow-sm border border-gray-100"
                                         referrerPolicy="no-referrer"
                                       />
@@ -405,8 +407,9 @@ export default function GlobalExplorer() {
                       <div className="text-[10px] text-gray-400 uppercase tracking-widest font-bold mb-4">Closest Milestone</div>
                       <div className="flex items-center gap-3 mb-3">
                         <img 
-                          src={`https://flagcdn.com/w40/${closestCountry.currency.iso}.png`} 
+                          src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/${closestCountry.currency.iso}.svg`} 
                           alt={closestCountry.currency.country}
+                          onError={(e) => { e.currentTarget.style.display = 'none'; }}
                           className="w-8 h-5 object-cover rounded shadow-sm"
                           referrerPolicy="no-referrer"
                         />
@@ -428,8 +431,9 @@ export default function GlobalExplorer() {
                       <div className="text-[10px] text-brand-500 uppercase tracking-widest font-bold mb-4">Maximum Power</div>
                       <div className="flex items-center gap-3 mb-3">
                         <img 
-                          src={`https://flagcdn.com/w40/${furthestCountry.currency.iso}.png`} 
+                          src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/${furthestCountry.currency.iso}.svg`} 
                           alt={furthestCountry.currency.country}
+                          onError={(e) => { e.currentTarget.style.display = 'none'; }}
                           className="w-8 h-5 object-cover rounded shadow-sm"
                           referrerPolicy="no-referrer"
                         />
@@ -692,8 +696,9 @@ export default function GlobalExplorer() {
                 <div className="flex items-start justify-between mb-6">
                   <div className="flex items-center gap-3">
                     <img 
-                      src={`https://flagcdn.com/w80/${result.currency.iso}.png`} 
+                      src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/${result.currency.iso}.svg`} 
                       alt={result.currency.country}
+                      onError={(e) => { e.currentTarget.style.display = 'none'; }}
                       className="w-12 h-8 object-cover rounded-md shadow-md border border-gray-100"
                       referrerPolicy="no-referrer"
                     />
@@ -808,8 +813,9 @@ export default function GlobalExplorer() {
                   <motion.img 
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    src={`https://flagcdn.com/w320/${selectedResult.currency.iso}.png`} 
+                    src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/${selectedResult.currency.iso}.svg`} 
                     alt={selectedResult.currency.country}
+                    onError={(e) => { e.currentTarget.style.display = 'none'; }}
                     className="relative w-48 h-32 object-cover rounded-xl shadow-2xl border-4 border-white"
                     referrerPolicy="no-referrer"
                   />

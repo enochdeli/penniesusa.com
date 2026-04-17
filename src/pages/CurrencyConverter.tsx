@@ -259,8 +259,9 @@ function CurrencySelector({ selectedCode, onSelect }: { selectedCode: string, on
       >
         <span className="flex items-center gap-3">
           <img 
-            src={`https://flagcdn.com/w40/${selected.iso}.png`} 
+            src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/${selected.iso}.svg`} 
             alt={selected.country}
+            onError={(e) => { e.currentTarget.style.display = 'none'; }}
             className="w-6 h-4 object-cover rounded-sm shadow-sm"
             referrerPolicy="no-referrer"
           />
@@ -315,8 +316,9 @@ function CurrencySelector({ selectedCode, onSelect }: { selectedCode: string, on
                       <span className="flex items-center gap-3">
                         <div className="relative">
                           <img 
-                            src={`https://flagcdn.com/w40/${c.iso}.png`} 
+                            src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/${c.iso}.svg`} 
                             alt={c.country}
+                            onError={(e) => { e.currentTarget.style.display = 'none'; }}
                             className="w-7 h-5 object-cover rounded shadow-sm border border-gray-100"
                             referrerPolicy="no-referrer"
                           />

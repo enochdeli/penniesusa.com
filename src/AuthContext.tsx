@@ -8,17 +8,13 @@ import {
 } from 'firebase/auth';
 import { doc, getDoc, setDoc } from 'firebase/firestore';
 import { auth, db } from './firebase';
-
-interface UserPreferences {
-  baseCurrency?: string;
-  netWorth?: number;
-  searchHistory?: string[];
-}
+import { UserPreferences } from './types';
 
 interface AuthContextType {
   user: User | null;
   preferences: UserPreferences | null;
   isAuthReady: boolean;
+  isAdmin: boolean;
   signIn: () => Promise<void>;
   logOut: () => Promise<void>;
   updatePreferences: (newPrefs: Partial<UserPreferences>) => Promise<void>;
@@ -30,6 +26,9 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [user, setUser] = useState<User | null>(null);
   const [preferences, setPreferences] = useState<UserPreferences | null>(null);
   const [isAuthReady, setIsAuthReady] = useState(false);
+
+  // enockdelicieux24@gmail.com is automatically a super-admin
+  const isAdmin = user?.email === 'enockdelicieux24@gmail.com' || !!preferences?.isAdmin;
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
@@ -49,7 +48,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             updatedAt: new Date().toISOString()
           };
           await setDoc(docRef, initialData);
-          setPreferences({ baseCurrency: 'USD' });
+          setPreferences(initialData);
         }
       } else {
         setPreferences(null);
@@ -110,7 +109,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   return (
-    <AuthContext.Provider value={{ user, preferences, isAuthReady, signIn, logOut, updatePreferences }}>
+    <AuthContext.Provider value={{ user, preferences, isAuthReady, isAdmin, signIn, logOut, updatePreferences }}>
       {children}
     </AuthContext.Provider>
   );

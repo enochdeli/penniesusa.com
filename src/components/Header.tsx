@@ -7,14 +7,19 @@ import { useAuth } from '../AuthContext';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { user, signIn, logOut, isAuthReady } = useAuth();
+  const { user, signIn, logOut, isAuthReady, isAdmin } = useAuth();
 
   const navItems = [
     { name: 'Global Explorer', path: '/' },
     { name: 'Converter', path: '/converter' },
     { name: 'Wealth Insights', path: '/insights' },
+    { name: 'Blog', path: '/blog' },
     { name: 'About', path: '/about' },
   ];
+
+  if (isAdmin) {
+    navItems.push({ name: 'Admin', path: '/admin/blog' });
+  }
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-brand-100">

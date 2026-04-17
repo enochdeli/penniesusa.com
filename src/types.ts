@@ -17,3 +17,28 @@ export interface MillionaireResult {
   isMillionaire: boolean;
   valueForOneMillion: number; // How much of the user's base currency is 1M local
 }
+
+export interface UserPreferences {
+  userId: string;
+  email: string;
+  baseCurrency?: string;
+  netWorth?: number;
+  searchHistory?: string[];
+  isAdmin?: boolean;
+  updatedAt?: string;
+}
+
+export interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  summary?: string;
+  content: string;
+  coverImageUrl?: string;
+  authorId: string;
+  authorName: string;
+  tags?: string[];
+  published: boolean;
+  createdAt: string;
+  updatedAt?: string;
+}
