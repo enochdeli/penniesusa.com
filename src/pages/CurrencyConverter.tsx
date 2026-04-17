@@ -125,10 +125,16 @@ export default function CurrencyConverter() {
         {loading ? (
           <div className="flex flex-col flex-1 items-center justify-center p-20">
              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 2, repeat: Infinity, ease: 'linear' }}
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+                className="w-16 h-16 rounded-2xl overflow-hidden shadow-xl shadow-brand-500/20"
              >
-                <RefreshCcw className="w-12 h-12 text-brand-500" />
+                <img 
+                  src="https://generativelanguage.googleapis.com/v1beta/files/input_file_0.png" 
+                  alt="Loading..."
+                  className="w-full h-full object-cover"
+                  referrerPolicy="no-referrer"
+                />
              </motion.div>
           </div>
         ) : (

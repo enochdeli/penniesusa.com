@@ -22,8 +22,13 @@ export default function Header() {
         {/* Logo */}
         <NavLink to="/" className="flex items-center gap-3 group cursor-pointer">
           <div className="relative">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#14b8a6] to-[#0f766e] flex items-center justify-center text-white shadow-lg shadow-teal-900/20 group-hover:scale-110 transition-transform duration-500">
-              <Coins className="w-6 h-6" />
+            <div className="w-10 h-10 rounded-xl overflow-hidden shadow-lg shadow-teal-900/20 group-hover:scale-110 transition-transform duration-500">
+              <img 
+                src="https://generativelanguage.googleapis.com/v1beta/files/input_file_0.png" 
+                alt="PenniesUSA Logo"
+                className="w-full h-full object-cover"
+                referrerPolicy="no-referrer"
+              />
             </div>
             <div className="absolute -top-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center shadow-sm">
               <div className="w-2.5 h-2.5 bg-brand-500 rounded-full animate-pulse" />

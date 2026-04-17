@@ -75,9 +75,12 @@ export default function GlobalExplorer() {
   const handleSearchCheck = async () => {
     document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
     
-    // Save net worth preference
+    // Save net worth preference and history
     if (isAuthReady && preferences && amount) {
-      await updatePreferences({ netWorth: parseFloat(amount) });
+      await updatePreferences({ 
+        netWorth: parseFloat(amount),
+        searchHistory: [`${amount} ${baseCurrencyCode}`]
+      });
     }
   };
 
@@ -141,10 +144,16 @@ export default function GlobalExplorer() {
     return (
       <div className="min-h-[60vh] flex items-center justify-center">
         <motion.div 
-          animate={{ rotate: 360 }}
-          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          animate={{ scale: [1, 1.1, 1] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="w-16 h-16 rounded-2xl overflow-hidden shadow-xl shadow-brand-500/20"
         >
-          <Coins className="w-12 h-12 text-brand-500" />
+          <img 
+            src="https://generativelanguage.googleapis.com/v1beta/files/input_file_0.png" 
+            alt="Loading..."
+            className="w-full h-full object-cover"
+            referrerPolicy="no-referrer"
+          />
         </motion.div>
       </div>
     );

@@ -17,8 +17,8 @@ export default defineConfig(({ mode }) => {
         },
         includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
         manifest: {
-          name: 'penniesusa v3',
-          short_name: 'penniesusa',
+          name: 'PenniesUSA',
+          short_name: 'PenniesUSA',
           description: 'Discover how far your money goes around the world.',
           theme_color: '#14b8a6',
           background_color: '#fcfaf7',
@@ -26,18 +26,18 @@ export default defineConfig(({ mode }) => {
           start_url: '/',
           icons: [
             {
-              src: 'https://cdn-icons-png.flaticon.com/512/2489/2489756.png',
+              src: 'https://generativelanguage.googleapis.com/v1beta/files/input_file_0.png',
               sizes: '192x192',
               type: 'image/png'
             },
             {
-              src: 'https://cdn-icons-png.flaticon.com/512/2489/2489756.png',
+              src: 'https://generativelanguage.googleapis.com/v1beta/files/input_file_0.png',
               sizes: '512x512',
               type: 'image/png'
             },
             {
-              src: 'https://cdn-icons-png.flaticon.com/512/2489/2489756.png',
-              sizes: '512x512',
+              src: 'https://generativelanguage.googleapis.com/v1beta/files/input_file_0.png',
+              sizes: '1024x1024',
               type: 'image/png',
               purpose: 'any maskable'
             }

@@ -1,7 +1,10 @@
 import { motion } from 'motion/react';
-import { TrendingUp, Coins, Globe2, ArrowRight, Shield, Zap, BarChart3 } from 'lucide-react';
+import { TrendingUp, Coins, Globe2, ArrowRight, Shield, Zap, BarChart3, UserCheck, History } from 'lucide-react';
+import { useAuth } from '../AuthContext';
 
 export default function WealthInsights() {
+  const { user, preferences, isAuthReady } = useAuth();
+
   const insights = [
     {
       title: "Global Diversification",
@@ -33,9 +36,45 @@ export default function WealthInsights() {
         >
           <span className="text-brand-600 font-bold uppercase tracking-[0.3em] text-[10px] mb-4 block">Intelligence</span>
           <h1 className="text-5xl md:text-6xl font-display font-black text-[#0a192f] mb-6">Wealth Insights</h1>
-          <p className="text-gray-500 max-w-2xl mx-auto font-light text-lg">
+          <p className="text-gray-500 max-w-2xl mx-auto font-light text-lg mb-8">
             Strategic intelligence for the global citizen. Learn how to manage, grow, and protect your wealth across borders.
           </p>
+
+          {isAuthReady && user && preferences && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              className="bg-brand-50 border border-brand-100 rounded-3xl p-8 text-left max-w-4xl mx-auto mb-12 shadow-sm"
+            >
+              <div className="flex items-center gap-4 mb-6">
+                <div className="w-12 h-12 rounded-full bg-brand-100 flex items-center justify-center text-brand-600">
+                  <UserCheck className="w-6 h-6" />
+                </div>
+                <div>
+                  <h3 className="font-display font-bold text-xl text-gray-900">Welcome back, {user.displayName || 'Explorer'}</h3>
+                  <p className="text-sm text-gray-600">
+                    Your preferred currency is <span className="font-bold text-brand-700">{preferences.baseCurrency || 'USD'}</span>
+                    {preferences.netWorth && <span> and your saved net worth is <span className="font-bold text-brand-700">{preferences.netWorth.toLocaleString()}</span></span>}.
+                  </p>
+                </div>
+              </div>
+
+              {preferences.searchHistory && preferences.searchHistory.length > 0 && (
+                <div className="pl-16">
+                  <h4 className="text-sm font-bold uppercase tracking-widest text-gray-500 mb-3 flex items-center gap-2">
+                    <History className="w-4 h-4" /> Recent Searches
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {preferences.searchHistory.map((search, i) => (
+                      <span key={i} className="px-3 py-1.5 bg-white border border-gray-200 rounded-lg text-sm text-gray-700 shadow-sm font-medium">
+                        {search}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </motion.div>
+          )}
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
