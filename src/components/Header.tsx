@@ -22,19 +22,25 @@ export default function Header() {
         {/* Logo */}
         <NavLink to="/" className="flex items-center gap-3 group cursor-pointer">
           <div className="relative">
+            {/* High-fidelity CSS Logo Reconstruction */}
             <div className="w-10 h-10 rounded-xl bg-[#14b8a6] relative flex items-center justify-center shadow-lg shadow-teal-900/20 group-hover:scale-110 transition-transform duration-500 overflow-hidden">
-              <div className="relative translate-y-0.5 -translate-x-1">
-                <div className="w-5 h-5 rounded-full border-[1.5px] border-white flex items-center justify-center transform -rotate-12 translate-x-1">
-                  <span className="text-[8px] font-bold text-white leading-none">1</span>
+              <div className="relative translate-y-0.5 -translate-x-1 scale-110">
+                {/* Coin 1 */}
+                <div className="w-5 h-5 rounded-full border-[1.5px] border-white flex items-center justify-center transform -rotate-12 translate-x-1.5 translate-y-0.5 bg-[#14b8a6]">
+                  <span className="text-[9px] font-black text-white leading-none">1</span>
                 </div>
-                <div className="w-5 h-5 rounded-full border-[1.5px] border-white flex items-center justify-center absolute -top-2 left-3 transform rotate-12">
-                  <span className="text-[8px] font-bold text-white leading-none">1</span>
+                {/* Coin 2 */}
+                <div className="w-5 h-5 rounded-full border-[1.5px] border-white flex items-center justify-center absolute -top-2.5 left-3.5 transform rotate-12 bg-[#14b8a6] shadow-[-2px_2px_4px_rgba(0,0,0,0.1)]">
+                  <span className="text-[9px] font-black text-white leading-none">1</span>
                 </div>
               </div>
-              <div className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-white rounded-full flex items-center justify-center">
+              {/* Brand Accent Dot */}
+              <div className="absolute top-1.5 right-1.5 w-2.5 h-2.5 bg-white rounded-full flex items-center justify-center shadow-sm">
                 <div className="w-1.5 h-1.5 bg-[#14b8a6] rounded-full" />
               </div>
             </div>
+            
+            {/* Activity Indicator */}
             <div className="absolute -top-1 -right-1 w-4 h-4 bg-white rounded-full flex items-center justify-center shadow-sm">
               <div className="w-2.5 h-2.5 bg-brand-500 rounded-full animate-pulse" />
             </div>
