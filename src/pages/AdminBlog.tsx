@@ -57,7 +57,7 @@ export default function AdminBlog() {
   if (!isAdmin) return null;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 font-sans">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 font-sans">
       <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-6 border-b border-gray-200">
         <div>
           <h1 className="text-3xl font-display font-bold text-gray-900">Blog Manager</h1>

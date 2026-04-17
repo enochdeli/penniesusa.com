@@ -43,7 +43,7 @@ export default function BlogPost() {
 
   if (loading) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-20 animate-pulse">
+      <div className="max-w-3xl mx-auto px-4 pt-28 pb-20 animate-pulse">
         <div className="h-4 bg-gray-200 w-24 rounded mb-8"></div>
         <div className="h-12 bg-gray-200 w-3/4 rounded mb-6"></div>
         <div className="h-6 bg-gray-200 w-1/4 rounded mb-12"></div>
@@ -59,7 +59,7 @@ export default function BlogPost() {
 
   if (!post) {
     return (
-      <div className="max-w-3xl mx-auto px-4 py-32 text-center">
+      <div className="max-w-3xl mx-auto px-4 pt-32 pb-32 text-center">
         <h1 className="text-4xl font-display font-bold text-gray-900 mb-4">Post Not Found</h1>
         <p className="text-gray-600 mb-8">The article you're looking for doesn't exist or has been removed.</p>
         <button 
@@ -75,7 +75,7 @@ export default function BlogPost() {
   return (
     <article className="pb-20 font-sans">
       {/* Header section (without cover image constraint) */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8">
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-8">
         <Link 
           to="/blog"
           className="inline-flex items-center gap-2 text-brand-600 hover:text-brand-700 font-medium mb-8 group"

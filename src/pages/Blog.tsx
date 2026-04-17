@@ -36,7 +36,7 @@ export default function Blog() {
   }, []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20 font-sans">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 md:pt-36 md:pb-20 font-sans">
       <div className="text-center mb-16">
         <motion.h1 
           initial={{ y: 20, opacity: 0 }}

@@ -146,7 +146,7 @@ export default function AdminEditPost() {
   }
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-12 font-sans">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 font-sans">
       <div className="flex items-center gap-4 mb-8">
         <Link 
           to="/admin/blog"
