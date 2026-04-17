@@ -26,12 +26,12 @@ export default defineConfig(({ mode }) => {
           start_url: '/',
           icons: [
             {
-              src: 'https://cdn-icons-png.flaticon.com/512/2489/2489756.png',
+              src: 'https://generativelanguage.googleapis.com/v1beta/files/input_file_2.png',
               sizes: '192x192',
               type: 'image/png'
             },
             {
-              src: 'https://cdn-icons-png.flaticon.com/512/2489/2489756.png',
+              src: 'https://generativelanguage.googleapis.com/v1beta/files/input_file_2.png',
               sizes: '512x512',
               type: 'image/png'
             }

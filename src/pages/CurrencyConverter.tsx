@@ -125,24 +125,16 @@ export default function CurrencyConverter() {
         {loading ? (
           <div className="flex flex-col flex-1 items-center justify-center p-20">
              <motion.div
-                animate={{ scale: [1, 1.1, 1] }}
+                animate={{ scale: [1, 1.05, 1], opacity: [0.8, 1, 0.8] }}
                 transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-                className="w-16 h-16 rounded-2xl bg-[#14b8a6] relative flex items-center justify-center shadow-xl shadow-brand-500/20 overflow-hidden"
+                className="w-32 h-32"
              >
-                <div className="relative translate-y-1 -translate-x-2 scale-125">
-                  {/* Coin 1 */}
-                  <div className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center transform -rotate-12 translate-x-2 translate-y-1 bg-[#14b8a6]">
-                    <span className="text-[12px] font-black text-white leading-none">1</span>
-                  </div>
-                  {/* Coin 2 */}
-                  <div className="w-8 h-8 rounded-full border-2 border-white flex items-center justify-center absolute -top-4 left-5 transform rotate-12 bg-[#14b8a6] shadow-[-3px_3px_6px_rgba(0,0,0,0.1)]">
-                    <span className="text-[12px] font-black text-white leading-none">1</span>
-                  </div>
-                </div>
-                {/* Brand Accent Dot */}
-                <div className="absolute top-2.5 right-2.5 w-4 h-4 bg-white rounded-full flex items-center justify-center shadow-sm">
-                  <div className="w-2.5 h-2.5 bg-[#14b8a6] rounded-full" />
-                </div>
+                <img 
+                  src="https://generativelanguage.googleapis.com/v1beta/files/input_file_2.png" 
+                  alt="Loading..."
+                  className="w-full h-full object-contain"
+                  referrerPolicy="no-referrer"
+                />
              </motion.div>
           </div>
         ) : (
