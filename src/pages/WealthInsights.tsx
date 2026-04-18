@@ -1,4 +1,5 @@
 import { motion } from 'motion/react';
+import SEO from '../components/SEO';
 import { TrendingUp, Coins, Globe2, ArrowRight, Shield, Zap, BarChart3, UserCheck, History } from 'lucide-react';
 import { useAuth } from '../AuthContext';
 
@@ -28,6 +29,20 @@ export default function WealthInsights() {
 
   return (
     <div className="pt-32 pb-20 px-6">
+      <SEO 
+        title="Wealth Insights & Global Strategy | penniesusa"
+        description="Strategic intelligence for the global citizen. Learn about geo-arbitrage, global diversification, and how to grow your wealth across borders."
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": "Wealth Insights & Global Strategy",
+          "description": "Strategic intelligence for the global citizen.",
+          "author": {
+            "@type": "Organization",
+            "name": "penniesusa"
+          }
+        }}
+      />
       <div className="max-w-7xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

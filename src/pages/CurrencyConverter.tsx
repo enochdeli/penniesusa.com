@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import SEO from '../components/SEO';
 import { ArrowRightLeft, Search, ChevronDown, Coins, RefreshCcw } from 'lucide-react';
 import { CURRENCIES } from '../constants';
 import { fetchExchangeRates } from '../services/currencyService';
@@ -94,6 +95,17 @@ export default function CurrencyConverter() {
 
   return (
     <div className="pt-20 min-h-screen bg-[#fcfaf7]">
+      <SEO 
+        title="Live Global Currency Converter | penniesusa"
+        description="Convert between 130+ global currencies with real-time exchange rates. Accurately calculate your international purchasing power instantly."
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "ExchangeRateSpecification",
+          "name": "Live Currency Exchange Rates",
+          "url": window.location.href,
+          "currency": "USD"
+        }}
+      />
       <header className="relative pt-20 pb-16 px-6">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-7xl h-full">

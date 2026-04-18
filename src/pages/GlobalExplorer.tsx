@@ -1,5 +1,6 @@
 import { useState, useEffect, useMemo, ReactNode } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
+import SEO from '../components/SEO';
 import { 
   Coins, 
   Globe2, 
@@ -169,6 +170,18 @@ export default function GlobalExplorer() {
 
   return (
     <div className="pt-20">
+      <SEO 
+        title="Where Are You a Millionaire? | Global Wealth Explorer"
+        description={`Find exactly where you are a millionaire today. Your net worth converted into 130+ currencies with real-time exchange rates.`}
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "FinancialService",
+          "name": "penniesusa Global Explorer",
+          "description": "Discover your purchasing power globally. Convert your net worth and see where your money goes furthest.",
+          "url": window.location.href,
+          "serviceType": "Currency Valuation & Wealth Analysis"
+        }}
+      />
       {/* Hero Section */}
       <header className="relative pt-20 pb-16 px-6">
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
