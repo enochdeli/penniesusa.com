@@ -115,19 +115,21 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
+  const value = React.useMemo(() => ({ 
+    user, 
+    preferences, 
+    isAuthReady, 
+    isAdmin, 
+    isAuthModalOpen,
+    openAuthModal,
+    closeAuthModal,
+    signInWithGoogle, 
+    logOut, 
+    updatePreferences 
+  }), [user, preferences, isAuthReady, isAdmin, isAuthModalOpen]);
+
   return (
-    <AuthContext.Provider value={{ 
-      user, 
-      preferences, 
-      isAuthReady, 
-      isAdmin, 
-      isAuthModalOpen,
-      openAuthModal,
-      closeAuthModal,
-      signInWithGoogle, 
-      logOut, 
-      updatePreferences 
-    }}>
+    <AuthContext.Provider value={value}>
       {children}
     </AuthContext.Provider>
   );

@@ -43,9 +43,14 @@ export default function GlobalExplorer() {
 
   useEffect(() => {
     async function init() {
-      const data = await fetchExchangeRates();
-      setRates(data ? data.rates : null);
-      setLoading(false);
+      try {
+        const data = await fetchExchangeRates();
+        setRates(data ? data.rates : null);
+      } catch (err) {
+        console.error("Initialization error:", err);
+      } finally {
+        setLoading(false);
+      }
     }
     init();
   }, []);

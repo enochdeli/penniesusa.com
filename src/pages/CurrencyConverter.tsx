@@ -21,12 +21,17 @@ export default function CurrencyConverter() {
 
   useEffect(() => {
     async function init() {
-      const data = await fetchExchangeRates();
-      if (data) {
-        setRates(data.rates);
-        setLastUpdated(data.lastUpdated);
+      try {
+        const data = await fetchExchangeRates();
+        if (data) {
+          setRates(data.rates);
+          setLastUpdated(data.lastUpdated);
+        }
+      } catch (err) {
+        console.error("Converter initialization error:", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     }
     init();
   }, []);
