@@ -53,10 +53,13 @@ export default function AuthModal() {
       setMessage("Password reset link sent! Please check your inbox.");
     } catch (err: any) {
       console.error(err);
-      if (err.code === 'auth/user-not-found') {
+      const errorMessage = err.message || '';
+      const errorCode = err.code || '';
+
+      if (errorCode === 'auth/user-not-found' || errorMessage.includes('user-not-found')) {
         setError("No account found with this email.");
       } else {
-        setError(err.message || 'An error occurred. Please try again.');
+        setError(errorMessage || 'An error occurred. Please try again.');
       }
     } finally {
       setLoading(false);
@@ -94,14 +97,24 @@ export default function AuthModal() {
       closeAuthModal();
     } catch (err: any) {
       console.error(err);
-      if (err.code === 'auth/email-already-in-use') {
+      const errorMessage = err.message || '';
+      const errorCode = err.code || '';
+
+      if (errorCode === 'auth/email-already-in-use' || errorMessage.includes('email-already-in-use')) {
         setError("This email is already registered. Try logging in.");
-      } else if (err.code === 'auth/wrong-password' || err.code === 'auth/user-not-found' || err.code === 'auth/invalid-credential') {
+      } else if (
+        errorCode === 'auth/wrong-password' || 
+        errorCode === 'auth/user-not-found' || 
+        errorCode === 'auth/invalid-credential' ||
+        errorMessage.includes('wrong-password') ||
+        errorMessage.includes('user-not-found') ||
+        errorMessage.includes('invalid-credential')
+      ) {
         setError("Invalid email or password.");
-      } else if (err.code === 'auth/weak-password') {
+      } else if (errorCode === 'auth/weak-password' || errorMessage.includes('weak-password')) {
         setError("Password should be at least 6 characters.");
       } else {
-        setError(err.message || 'An error occurred during authentication.');
+        setError(errorMessage || 'An error occurred during authentication.');
       }
     } finally {
       setLoading(false);
