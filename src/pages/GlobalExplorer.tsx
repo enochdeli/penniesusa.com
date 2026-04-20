@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, ReactNode } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'motion/react';
 import SEO from '../components/SEO';
 import { 
@@ -29,9 +30,12 @@ import { useAuth } from '../AuthContext';
 
 export default function GlobalExplorer() {
   const { preferences, updatePreferences, isAuthReady } = useAuth();
+  const location = useLocation();
   
-  // Local state falls back to preferences or defaults
-  const [amount, setAmount] = useState<string>('');
+  // Local state falls back to navigation state, then preferences, then empty
+  const [amount, setAmount] = useState<string>(() => {
+    return (location.state as any)?.amount || '';
+  });
   const [baseCurrencyCode, setBaseCurrencyCode] = useState<string>('USD');
   const [rates, setRates] = useState<ExchangeRates | null>(null);
   const [loading, setLoading] = useState(true);
@@ -66,6 +70,15 @@ export default function GlobalExplorer() {
       }
     }
   }, [isAuthReady, preferences]);
+
+  // Auto-scroll to results if coming from CTA
+  useEffect(() => {
+    if ((location.state as any)?.amount) {
+      setTimeout(() => {
+        document.getElementById('results-section')?.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
+    }
+  }, [location.state]);
 
   const handleCurrencyChange = async (code: string) => {
     setBaseCurrencyCode(code);
