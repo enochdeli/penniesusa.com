@@ -247,7 +247,7 @@ export default function GlobalExplorer() {
                     <span className="flex items-center gap-2 font-semibold">
                       <img 
                         src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/${baseCurrency.iso}.svg`} 
-                        alt={baseCurrency.country}
+                        alt={`${baseCurrency.country} flag - Your selected base currency for global wealth analysis`}
                         onError={(e) => { e.currentTarget.style.display = 'none'; }}
                         className="w-6 h-4 object-cover rounded-sm shadow-sm"
                         referrerPolicy="no-referrer"
@@ -426,7 +426,7 @@ export default function GlobalExplorer() {
                       <div className="flex items-center gap-3 mb-3">
                         <img 
                           src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/${closestCountry.currency.iso}.svg`} 
-                          alt={closestCountry.currency.country}
+                          alt={`${closestCountry.currency.country} flag - Explore the millionaire threshold in ${closestCountry.currency.country}`}
                           onError={(e) => { e.currentTarget.style.display = 'none'; }}
                           className="w-8 h-5 object-cover rounded shadow-sm"
                           referrerPolicy="no-referrer"
@@ -450,7 +450,7 @@ export default function GlobalExplorer() {
                       <div className="flex items-center gap-3 mb-3">
                         <img 
                           src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/${furthestCountry.currency.iso}.svg`} 
-                          alt={furthestCountry.currency.country}
+                          alt={`${furthestCountry.currency.country} flag - Maximize your purchasing power in ${furthestCountry.currency.country}`}
                           onError={(e) => { e.currentTarget.style.display = 'none'; }}
                           className="w-8 h-5 object-cover rounded shadow-sm"
                           referrerPolicy="no-referrer"
@@ -715,7 +715,7 @@ export default function GlobalExplorer() {
                   <div className="flex items-center gap-3">
                     <img 
                       src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/${result.currency.iso}.svg`} 
-                      alt={result.currency.country}
+                      alt={`${result.currency.country} flag - Millionaire status and net worth in ${result.currency.country}`}
                       onError={(e) => { e.currentTarget.style.display = 'none'; }}
                       className="w-12 h-8 object-cover rounded-md shadow-md border border-gray-100"
                       referrerPolicy="no-referrer"
@@ -832,7 +832,7 @@ export default function GlobalExplorer() {
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     src={`https://cdn.jsdelivr.net/gh/lipis/flag-icons@7.0.0/flags/4x3/${selectedResult.currency.iso}.svg`} 
-                    alt={selectedResult.currency.country}
+                    alt={`${selectedResult.currency.country} flag - Detailed lifestyle and wealth analysis for ${selectedResult.currency.country}`}
                     onError={(e) => { e.currentTarget.style.display = 'none'; }}
                     className="relative w-48 h-32 object-cover rounded-xl shadow-2xl border-4 border-white"
                     referrerPolicy="no-referrer"

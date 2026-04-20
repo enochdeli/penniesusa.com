@@ -1,13 +1,50 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
-import { Coins, Menu, X, LogOut, User } from 'lucide-react';
+import { Coins, Menu, X, LogOut, User, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { cn } from '../lib/utils';
 import { useAuth } from '../AuthContext';
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+  const [showInstallBtn, setShowInstallBtn] = useState(false);
   const { user, openAuthModal, logOut, isAuthReady, isAdmin } = useAuth();
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: any) => {
+      // Prevent the mini-infobar from appearing on mobile
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      setDeferredPrompt(e);
+      // Update UI notify the user they can install the PWA
+      setShowInstallBtn(true);
+    };
+
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+
+    // Check if the app is already installed
+    if (window.matchMedia('(display-mode: standalone)').matches) {
+      setShowInstallBtn(false);
+    }
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    if (!deferredPrompt) return;
+    // Show the install prompt
+    deferredPrompt.prompt();
+    // Wait for the user to respond to the prompt
+    const { outcome } = await deferredPrompt.userChoice;
+    // Optionally, send analytics event with outcome of user choice
+    console.log(`User response to the install prompt: ${outcome}`);
+    // We've used the prompt, and can't use it again, throw it away
+    setDeferredPrompt(null);
+    setShowInstallBtn(false);
+  };
 
   const navItems = [
     { name: 'Global Explorer', path: '/' },
@@ -59,6 +96,14 @@ export default function Header() {
 
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-10">
+          {showInstallBtn && (
+            <button 
+              onClick={handleInstallClick}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-brand-50 text-brand-700 text-[11px] font-bold uppercase tracking-[0.2em] border border-brand-100 hover:bg-brand-100 transition-all active:scale-95"
+            >
+              <Download className="w-4 h-4" /> Install
+            </button>
+          )}
           {navItems.map((item) => (
             <NavLink 
               key={item.name} 
@@ -118,6 +163,14 @@ export default function Header() {
             className="absolute top-full left-0 right-0 bg-white border-b border-brand-100 shadow-2xl md:hidden"
           >
             <div className="flex flex-col p-6 gap-6">
+              {showInstallBtn && (
+                <button 
+                  onClick={handleInstallClick}
+                  className="w-full py-4 rounded-xl bg-brand-600 text-white text-sm font-bold uppercase tracking-[0.2em] flex items-center justify-center gap-2 shadow-lg shadow-brand-600/20 active:scale-95 transition-all"
+                >
+                  <Download className="w-5 h-5" /> Install Pennies App
+                </button>
+              )}
               {navItems.map((item) => (
                 <NavLink 
                   key={item.name} 

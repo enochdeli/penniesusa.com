@@ -13,9 +13,7 @@ registerSW({
 });
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <HelmetProvider>
-      <App />
-    </HelmetProvider>
-  </StrictMode>,
+  <HelmetProvider>
+    <App />
+  </HelmetProvider>,
 );

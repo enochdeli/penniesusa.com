@@ -33,6 +33,7 @@ export interface BlogPost {
   title: string;
   slug: string;
   summary?: string;
+  takeaways?: string[];
   content: string;
   coverImageUrl?: string;
   authorId: string;
