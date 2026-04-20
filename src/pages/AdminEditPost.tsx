@@ -24,6 +24,7 @@ export default function AdminEditPost() {
     takeaways: '' as string, // Newline separated temporarily for editing
     content: '',
     coverImageUrl: '',
+    galleryImages: '', // newline separated
     tags: '', // comma separated temporarily
     published: false,
   });
@@ -47,6 +48,7 @@ export default function AdminEditPost() {
               takeaways: data.takeaways ? data.takeaways.join('\n') : '',
               content: data.content,
               coverImageUrl: data.coverImageUrl || '',
+              galleryImages: data.galleryImages ? data.galleryImages.join('\n') : '',
               tags: data.tags ? data.tags.join(', ') : '',
               published: data.published,
             });
@@ -106,6 +108,11 @@ export default function AdminEditPost() {
         .split('\n')
         .map(t => t.trim())
         .filter(t => t.length > 0);
+
+      const galleryArray = formData.galleryImages
+        .split('\n')
+        .map(t => t.trim())
+        .filter(t => t.length > 0);
         
       const now = new Date().toISOString();
 
@@ -116,6 +123,7 @@ export default function AdminEditPost() {
         takeaways: takeawaysArray,
         content: formData.content,
         coverImageUrl: formData.coverImageUrl,
+        galleryImages: galleryArray,
         tags: tagsArray,
         published: formData.published,
         updatedAt: now,
@@ -140,6 +148,26 @@ export default function AdminEditPost() {
       setError(err.message || 'Failed to save post.');
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!id || isNew) return;
+    
+    if (window.confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
+      try {
+        setSaving(true);
+        await setDoc(doc(db, 'posts', id), { published: false }, { merge: true }); // Soft block
+        // Actual delete
+        const { deleteDoc, doc } = await import('firebase/firestore');
+        await deleteDoc(doc(db, 'posts', id));
+        navigate('/admin/blog');
+      } catch (err) {
+        console.error("Error deleting post:", err);
+        setError('Failed to delete post.');
+      } finally {
+        setSaving(false);
+      }
     }
   };
 
@@ -174,6 +202,16 @@ export default function AdminEditPost() {
           {saving ? <Loader2 className="w-5 h-5 animate-spin" /> : <Save className="w-5 h-5" />}
           {saving ? 'Saving...' : 'Save Post'}
         </button>
+        {!isNew && (
+          <button
+            onClick={handleDelete}
+            disabled={saving}
+            className="p-2.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-xl transition-colors border border-gray-200"
+            title="Delete Post"
+          >
+            <Trash2 className="w-6 h-6" />
+          </button>
+        )}
       </div>
 
       {error && (
@@ -282,6 +320,21 @@ export default function AdminEditPost() {
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm"
                   placeholder="The first key point...\nThe second key point..."
                 />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1 flex items-center gap-2">
+                  <ImageIcon className="w-4 h-4" /> Gallery Image URLs (One per line)
+                </label>
+                <textarea
+                  name="galleryImages"
+                  value={formData.galleryImages}
+                  onChange={handleChange}
+                  rows={4}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm"
+                  placeholder="https://image1.jpg\nhttps://image2.jpg..."
+                />
+                <p className="text-[10px] text-gray-400 mt-1 uppercase tracking-tighter font-bold font-mono">Visible in post gallery</p>
               </div>
 
               <div>

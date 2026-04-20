@@ -216,6 +216,32 @@ export default function BlogPost() {
                 {post.content}
               </Markdown>
             </div>
+
+            {/* Image Gallery */}
+            {post.galleryImages && post.galleryImages.length > 0 && (
+              <section className="pt-12 border-t border-brand-100">
+                <h3 className="text-2xl font-display font-black text-[#0a192f] mb-8">Article Gallery</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  {post.galleryImages.map((img, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="aspect-[4/3] rounded-3xl overflow-hidden border border-brand-100 shadow-lg hover:shadow-2xl transition-all duration-500 group"
+                    >
+                      <img 
+                        src={img} 
+                        alt={`Gallery item ${i + 1} for ${post.title}`}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                        referrerPolicy="no-referrer"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
 
           {/* Sidebar Area */}

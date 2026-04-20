@@ -36,6 +36,7 @@ export interface BlogPost {
   takeaways?: string[];
   content: string;
   coverImageUrl?: string;
+  galleryImages?: string[];
   authorId: string;
   authorName: string;
   tags?: string[];
