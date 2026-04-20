@@ -21,6 +21,7 @@ export default function AdminEditPost() {
     title: '',
     slug: '',
     summary: '',
+    takeaways: '' as string, // Newline separated temporarily for editing
     content: '',
     coverImageUrl: '',
     tags: '', // comma separated temporarily
@@ -43,6 +44,7 @@ export default function AdminEditPost() {
               title: data.title,
               slug: data.slug,
               summary: data.summary || '',
+              takeaways: data.takeaways ? data.takeaways.join('\n') : '',
               content: data.content,
               coverImageUrl: data.coverImageUrl || '',
               tags: data.tags ? data.tags.join(', ') : '',
@@ -99,6 +101,11 @@ export default function AdminEditPost() {
         .split(',')
         .map(t => t.trim())
         .filter(t => t.length > 0);
+      
+      const takeawaysArray = formData.takeaways
+        .split('\n')
+        .map(t => t.trim())
+        .filter(t => t.length > 0);
         
       const now = new Date().toISOString();
 
@@ -106,6 +113,7 @@ export default function AdminEditPost() {
         title: formData.title,
         slug: formData.slug,
         summary: formData.summary,
+        takeaways: takeawaysArray,
         content: formData.content,
         coverImageUrl: formData.coverImageUrl,
         tags: tagsArray,
@@ -261,6 +269,18 @@ export default function AdminEditPost() {
                   rows={3}
                   className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm"
                   placeholder="A brief 1-2 sentence overview for the index page..."
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Key Takeaways (One per line)</label>
+                <textarea
+                  name="takeaways"
+                  value={formData.takeaways}
+                  onChange={handleChange}
+                  rows={4}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-500 text-sm"
+                  placeholder="The first key point...\nThe second key point..."
                 />
               </div>
 
