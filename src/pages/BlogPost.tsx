@@ -5,9 +5,10 @@ import { collection, query, where, getDocs, limit } from 'firebase/firestore';
 import { db } from '../firebase';
 import { BlogPost as IBlogPost } from '../types';
 import { format } from 'date-fns';
-import { ArrowLeft, Clock, Share2, ArrowRight, ChevronRight, CheckCircle2 } from 'lucide-react';
+import { ArrowLeft, Clock, Share2, ArrowRight, ChevronRight, CheckCircle2, EyeOff } from 'lucide-react';
 import Markdown from 'react-markdown';
 import SEO from '../components/SEO';
+import { useAuth } from '../AuthContext';
 
 interface Heading {
   id: string;
@@ -18,6 +19,7 @@ interface Heading {
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
+  const { isAdmin } = useAuth();
   const [post, setPost] = useState<IBlogPost | null>(null);
   const [loading, setLoading] = useState(true);
   const [headings, setHeadings] = useState<Heading[]>([]);
@@ -27,12 +29,23 @@ export default function BlogPost() {
     const fetchPost = async () => {
       if (!slug) return;
       try {
-        // First try: Query by slug field
-        const q = query(
-          collection(db, 'posts'),
-          where('slug', '==', slug),
-          limit(1)
-        );
+        // Build query - filter by published unless user is admin
+        let q;
+        if (isAdmin) {
+          q = query(
+            collection(db, 'posts'),
+            where('slug', '==', slug),
+            limit(1)
+          );
+        } else {
+          q = query(
+            collection(db, 'posts'),
+            where('slug', '==', slug),
+            where('published', '==', true),
+            limit(1)
+          );
+        }
+        
         const snapshot = await getDocs(q);
         
         let foundPost: IBlogPost | null = null;
@@ -77,7 +90,7 @@ export default function BlogPost() {
     };
     
     fetchPost();
-  }, [slug]);
+  }, [slug, isAdmin]);
 
   if (loading) {
     return (
@@ -126,6 +139,11 @@ export default function BlogPost() {
           <Link to="/blog" className="hover:text-brand-600 transition-colors">Blog</Link>
           <ChevronRight className="w-3 h-3" />
           <span className="text-brand-600">{category}</span>
+          {!post.published && (
+            <span className="ml-4 inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-yellow-100 text-yellow-800 uppercase tracking-tighter">
+              <EyeOff className="w-3 h-3" /> Draft Mode
+            </span>
+          )}
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_350px] gap-12 items-start">
