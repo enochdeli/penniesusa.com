@@ -39,28 +39,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
-      setUser(currentUser);
-      if (currentUser) {
-        // Fetch or create user preferences
-        const docRef = doc(db, 'users', currentUser.uid);
-        const docSnap = await getDoc(docRef);
-        if (docSnap.exists()) {
-          setPreferences(docSnap.data() as UserPreferences);
+      try {
+        setUser(currentUser);
+        if (currentUser) {
+          // Fetch or create user preferences
+          const docRef = doc(db, 'users', currentUser.uid);
+          const docSnap = await getDoc(docRef);
+          if (docSnap.exists()) {
+            setPreferences(docSnap.data() as UserPreferences);
+          } else {
+            // Create initial user doc
+            const initialData = {
+              userId: currentUser.uid,
+              email: currentUser.email || 'unknown@example.com',
+              baseCurrency: 'USD',
+              updatedAt: new Date().toISOString()
+            };
+            await setDoc(docRef, initialData);
+            setPreferences(initialData);
+          }
         } else {
-          // Create initial user doc
-          const initialData = {
-            userId: currentUser.uid,
-            email: currentUser.email || 'unknown@example.com',
-            baseCurrency: 'USD',
-            updatedAt: new Date().toISOString()
-          };
-          await setDoc(docRef, initialData);
-          setPreferences(initialData);
+          setPreferences(null);
         }
-      } else {
-        setPreferences(null);
+      } catch (error) {
+        console.error("Auth state change error:", error);
+      } finally {
+        setIsAuthReady(true);
       }
-      setIsAuthReady(true);
     });
 
     return unsubscribe;

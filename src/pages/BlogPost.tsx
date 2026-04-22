@@ -27,6 +27,7 @@ export default function BlogPost() {
     const fetchPost = async () => {
       if (!slug) return;
       try {
+        // First try: Query by slug field
         const q = query(
           collection(db, 'posts'),
           where('slug', '==', slug),
@@ -34,16 +35,26 @@ export default function BlogPost() {
         );
         const snapshot = await getDocs(q);
         
-        if (snapshot.empty) {
-          setPost(null);
-        } else {
+        let foundPost: IBlogPost | null = null;
+
+        if (!snapshot.empty) {
           const doc = snapshot.docs[0];
-          const postData = { ...doc.data(), id: doc.id } as IBlogPost;
-          setPost(postData);
+          foundPost = { ...doc.data(), id: doc.id } as IBlogPost;
+        } else {
+          // Second try: Maybe the slug is actually the document ID
+          const { getDoc, doc: firestoreDoc } = await import('firebase/firestore');
+          const docSnap = await getDoc(firestoreDoc(db, 'posts', slug));
+          if (docSnap.exists()) {
+            foundPost = { ...docSnap.data(), id: docSnap.id } as IBlogPost;
+          }
+        }
+
+        if (foundPost) {
+          setPost(foundPost);
           
           // Extract headings for Table of Contents
           const extractedHeadings: Heading[] = [];
-          const lines = postData.content.split('\n');
+          const lines = foundPost.content.split('\n');
           lines.forEach(line => {
             const match = line.match(/^(#{2,3})\s+(.+)$/);
             if (match) {
@@ -54,9 +65,12 @@ export default function BlogPost() {
             }
           });
           setHeadings(extractedHeadings);
+        } else {
+          setPost(null);
         }
       } catch (error) {
         console.error("Error fetching post:", error);
+        setPost(null);
       } finally {
         setLoading(false);
       }

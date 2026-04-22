@@ -77,7 +77,7 @@ export default function Blog() {
               transition={{ delay: index * 0.1 }}
             >
               <Link 
-                to={`/blog/${post.slug}`}
+                to={`/blog/${post.slug || post.id}`}
                 className="group block h-full bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm hover:shadow-xl hover:border-brand-200 transition-all duration-300 flex flex-col"
               >
                 {post.coverImageUrl ? (

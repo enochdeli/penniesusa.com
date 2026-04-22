@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { BlogPost } from '../types';
 import { useAuth } from '../AuthContext';
-import { ArrowLeft, Save, Loader2, Image as ImageIcon } from 'lucide-react';
+import { ArrowLeft, Save, Loader2, Image as ImageIcon, Trash2 } from 'lucide-react';
 import slugify from 'slugify';
 
 export default function AdminEditPost() {
@@ -157,9 +157,7 @@ export default function AdminEditPost() {
     if (window.confirm('Are you sure you want to delete this post? This action cannot be undone.')) {
       try {
         setSaving(true);
-        await setDoc(doc(db, 'posts', id), { published: false }, { merge: true }); // Soft block
         // Actual delete
-        const { deleteDoc, doc } = await import('firebase/firestore');
         await deleteDoc(doc(db, 'posts', id));
         navigate('/admin/blog');
       } catch (err) {
