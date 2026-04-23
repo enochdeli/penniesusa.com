@@ -1,17 +1,17 @@
-import React, { Suspense, lazy } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 
-const GlobalExplorer = lazy(() => import('./pages/GlobalExplorer'));
-const CurrencyConverter = lazy(() => import('./pages/CurrencyConverter'));
-const WealthInsights = lazy(() => import('./pages/WealthInsights'));
-const Blog = lazy(() => import('./pages/Blog'));
-const BlogPost = lazy(() => import('./pages/BlogPost'));
-const About = lazy(() => import('./pages/About'));
-const AdminBlog = lazy(() => import('./pages/AdminBlog'));
-const AdminEditPost = lazy(() => import('./pages/AdminEditPost'));
+import GlobalExplorer from './pages/GlobalExplorer';
+import CurrencyConverter from './pages/CurrencyConverter';
+import WealthInsights from './pages/WealthInsights';
+import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
+import About from './pages/About';
+import AdminBlog from './pages/AdminBlog';
+import AdminEditPost from './pages/AdminEditPost';
 
 const App: React.FC = () => {
   return (
@@ -20,19 +20,17 @@ const App: React.FC = () => {
         <Header />
         <main className="flex-grow">
           <ErrorBoundary>
-            <Suspense fallback={<LoadingSpinner />}>
-              <Routes>
-                <Route path="/" element={<GlobalExplorer />} />
-                <Route path="/converter" element={<CurrencyConverter />} />
-                <Route path="/insights" element={<WealthInsights />} />
-                <Route path="/blog" element={<Blog />} />
-                <Route path="/blog/:id" element={<BlogPost />} />
-                <Route path="/about" element={<About />} />
-                <Route path="/admin" element={<AdminBlog />} />
-                <Route path="/admin/new" element={<AdminEditPost />} />
-                <Route path="/admin/edit/:id" element={<AdminEditPost />} />
-              </Routes>
-            </Suspense>
+            <Routes>
+              <Route path="/" element={<GlobalExplorer />} />
+              <Route path="/converter" element={<CurrencyConverter />} />
+              <Route path="/insights" element={<WealthInsights />} />
+              <Route path="/blog" element={<Blog />} />
+              <Route path="/blog/:id" element={<BlogPost />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/admin" element={<AdminBlog />} />
+              <Route path="/admin/new" element={<AdminEditPost />} />
+              <Route path="/admin/edit/:id" element={<AdminEditPost />} />
+            </Routes>
           </ErrorBoundary>
         </main>
         <Footer />
@@ -40,11 +38,5 @@ const App: React.FC = () => {
     </Router>
   );
 };
-
-const LoadingSpinner = () => (
-  <div className="flex items-center justify-center min-h-[60vh]">
-    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-teal-500"></div>
-  </div>
-);
 
 export default App;
