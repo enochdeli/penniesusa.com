@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Plus, Table, PenSquare, Trash2 } from 'lucide-react';
 import { mockPosts } from '../services/blogService';
 
@@ -7,10 +8,10 @@ const AdminBlog: React.FC = () => {
     <div className="max-w-7xl mx-auto px-6 py-12">
       <div className="flex justify-between items-center mb-12">
         <h1 className="text-4xl font-black">Content <span className="text-teal-500">Manager</span></h1>
-        <button className="flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-2xl font-bold transition-all">
+        <Link to="/admin/new" className="flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-2xl font-bold transition-all">
           <Plus size={20} />
           Create New Post
-        </button>
+        </Link>
       </div>
 
       <div className="glass rounded-[2rem] border border-white/10 overflow-hidden">
@@ -38,9 +39,9 @@ const AdminBlog: React.FC = () => {
                   <td className="px-8 py-6 text-slate-400 text-sm">{post.date}</td>
                   <td className="px-8 py-6 text-right">
                     <div className="flex items-center justify-end gap-2">
-                       <button className="p-2 hover:bg-teal-500/20 text-slate-400 hover:text-teal-400 rounded-lg transition-colors">
+                       <Link to={`/admin/edit/${post.id}`} className="p-2 hover:bg-teal-500/20 text-slate-400 hover:text-teal-400 rounded-lg transition-colors">
                          <PenSquare size={18} />
-                       </button>
+                       </Link>
                        <button className="p-2 hover:bg-red-500/20 text-slate-400 hover:text-red-400 rounded-lg transition-colors">
                          <Trash2 size={18} />
                        </button>

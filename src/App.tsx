@@ -5,9 +5,13 @@ import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 
 const GlobalExplorer = lazy(() => import('./pages/GlobalExplorer'));
+const CurrencyConverter = lazy(() => import('./pages/CurrencyConverter'));
+const WealthInsights = lazy(() => import('./pages/WealthInsights'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
+const About = lazy(() => import('./pages/About'));
 const AdminBlog = lazy(() => import('./pages/AdminBlog'));
+const AdminEditPost = lazy(() => import('./pages/AdminEditPost'));
 
 const App: React.FC = () => {
   return (
@@ -19,9 +23,14 @@ const App: React.FC = () => {
             <Suspense fallback={<LoadingSpinner />}>
               <Routes>
                 <Route path="/" element={<GlobalExplorer />} />
+                <Route path="/converter" element={<CurrencyConverter />} />
+                <Route path="/insights" element={<WealthInsights />} />
                 <Route path="/blog" element={<Blog />} />
                 <Route path="/blog/:id" element={<BlogPost />} />
+                <Route path="/about" element={<About />} />
                 <Route path="/admin" element={<AdminBlog />} />
+                <Route path="/admin/new" element={<AdminEditPost />} />
+                <Route path="/admin/edit/:id" element={<AdminEditPost />} />
               </Routes>
             </Suspense>
           </ErrorBoundary>

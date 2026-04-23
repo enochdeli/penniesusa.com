@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Globe2, BookOpen, Settings, LayoutDashboard } from 'lucide-react';
+import { Globe2, BookOpen, LayoutDashboard, Coins, Zap, Info } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -12,8 +12,11 @@ const Header: React.FC = () => {
   const location = useLocation();
 
   const navItems = [
-    { name: 'Explorer', path: '/', icon: Globe2 },
+    { name: 'Global Explorer', path: '/', icon: Globe2 },
+    { name: 'Converter', path: '/converter', icon: Coins },
+    { name: 'Wealth Insights', path: '/insights', icon: Zap },
     { name: 'Blog', path: '/blog', icon: BookOpen },
+    { name: 'About', path: '/about', icon: Info },
     { name: 'Admin', path: '/admin', icon: LayoutDashboard },
   ];
 
