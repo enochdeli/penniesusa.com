@@ -1,151 +1,67 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { collection, query, orderBy, getDocs, deleteDoc, doc } from 'firebase/firestore';
-import { db } from '../firebase';
-import { BlogPost } from '../types';
-import { useAuth } from '../AuthContext';
-import { Plus, Edit2, Trash2, Eye, EyeOff } from 'lucide-react';
-import { format } from 'date-fns';
+import React from 'react';
+import { Plus, Table, PenSquare, Trash2 } from 'lucide-react';
+import { mockPosts } from '../services/blogService';
 
-export default function AdminBlog() {
-  const { isAdmin } = useAuth();
-  const navigate = useNavigate();
-  const [posts, setPosts] = useState<BlogPost[]>([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    if (!isAdmin) {
-      navigate('/');
-      return;
-    }
-
-    fetchPosts();
-  }, [isAdmin, navigate]);
-
-  const fetchPosts = async () => {
-    setLoading(true);
-    try {
-      const q = query(
-        collection(db, 'posts'),
-        orderBy('createdAt', 'desc')
-      );
-      const snapshot = await getDocs(q);
-      const fetchedPosts = snapshot.docs.map(doc => ({
-        ...doc.data(),
-        id: doc.id
-      })) as BlogPost[];
-      setPosts(fetchedPosts);
-    } catch (error) {
-      console.error("Error fetching admin posts:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleDelete = async (postId: string) => {
-    // We cannot use native browser confirm directly in the iframe typically,
-    // but building a custom modal here is overkill for admin. We'll use a soft delete via state, 
-    // but actually, we aren't restricted from `window.confirm`. Let's just do the deletion.
-    try {
-      await deleteDoc(doc(db, 'posts', postId));
-      setPosts(posts.filter(p => p.id !== postId));
-    } catch (error) {
-      console.error("Error deleting post:", error);
-    }
-  };
-
-  if (!isAdmin) return null;
-
+const AdminBlog: React.FC = () => {
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-12 font-sans">
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 pb-6 border-b border-gray-200">
-        <div>
-          <h1 className="text-3xl font-display font-bold text-gray-900">Blog Manager</h1>
-          <p className="text-gray-500 mt-1">Create, edit, and manage your articles.</p>
-        </div>
-        <div className="mt-4 md:mt-0">
-          <Link
-            to="/admin/blog/new"
-            className="inline-flex items-center gap-2 bg-brand-600 text-white px-5 py-2.5 rounded-xl font-medium hover:bg-brand-700 transition-colors shadow-sm"
-          >
-            <Plus className="w-5 h-5" />
-            New Post
-          </Link>
-        </div>
+    <div className="max-w-7xl mx-auto px-6 py-12">
+      <div className="flex justify-between items-center mb-12">
+        <h1 className="text-4xl font-black">Content <span className="text-teal-500">Manager</span></h1>
+        <button className="flex items-center gap-2 bg-teal-500 hover:bg-teal-600 text-white px-6 py-3 rounded-2xl font-bold transition-all">
+          <Plus size={20} />
+          Create New Post
+        </button>
       </div>
 
-      {loading ? (
-        <div className="animate-pulse space-y-4">
-          {[1,2,3].map(i => <div key={i} className="h-20 bg-gray-100 rounded-xl"></div>)}
+      <div className="glass rounded-[2rem] border border-white/10 overflow-hidden">
+        <div className="p-8 border-b border-white/5 flex items-center gap-2 text-slate-500">
+           <Table size={18} />
+           <span className="font-bold text-sm uppercase tracking-widest">Active Articles</span>
         </div>
-      ) : posts.length === 0 ? (
-        <div className="text-center py-20 bg-gray-50 rounded-2xl border border-dashed border-gray-300">
-          <p className="text-gray-500 mb-4">No content found. Start writing your first article!</p>
-          <Link
-            to="/admin/blog/new"
-            className="inline-flex items-center gap-2 text-brand-600 font-medium hover:text-brand-700"
-          >
-            <Plus className="w-5 h-5" /> Create Post
-          </Link>
-        </div>
-      ) : (
-        <div className="bg-white shadow-sm rounded-2xl border border-gray-200 overflow-hidden">
-          <ul className="divide-y divide-gray-200">
-            {posts.map(post => (
-              <li key={post.id} className="p-6 hover:bg-gray-50 transition-colors">
-                <div className="flex items-center justify-between">
-                  <div className="flex-1 min-w-0 pr-6">
-                    <div className="flex items-center gap-3 mb-1">
-                      <h3 className="text-lg font-semibold text-gray-900 truncate">
-                        {post.title}
-                      </h3>
-                      {post.published ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                          <Eye className="w-3 h-3" /> Published
-                        </span>
-                      ) : (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-                          <EyeOff className="w-3 h-3" /> Draft
-                        </span>
-                      )}
+        
+        <div className="overflow-x-auto">
+          <table className="w-full text-left">
+            <thead>
+              <tr className="bg-white/5 text-slate-400 text-sm uppercase">
+                <th className="px-8 py-4 font-bold tracking-tighter">Title</th>
+                <th className="px-8 py-4 font-bold tracking-tighter">Date</th>
+                <th className="px-8 py-4 font-bold tracking-tighter text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-white/5">
+              {mockPosts.map((post) => (
+                <tr key={post.id} className="hover:bg-white/5 transition-colors group">
+                  <td className="px-8 py-6">
+                    <div className="font-bold text-white group-hover:text-teal-400 transition-colors">{post.title}</div>
+                    <div className="text-xs text-slate-500">Slug: /{post.slug}</div>
+                  </td>
+                  <td className="px-8 py-6 text-slate-400 text-sm">{post.date}</td>
+                  <td className="px-8 py-6 text-right">
+                    <div className="flex items-center justify-end gap-2">
+                       <button className="p-2 hover:bg-teal-500/20 text-slate-400 hover:text-teal-400 rounded-lg transition-colors">
+                         <PenSquare size={18} />
+                       </button>
+                       <button className="p-2 hover:bg-red-500/20 text-slate-400 hover:text-red-400 rounded-lg transition-colors">
+                         <Trash2 size={18} />
+                       </button>
                     </div>
-                    <div className="text-sm text-gray-500 flex items-center gap-4">
-                      <span>{format(new Date(post.createdAt), 'MMM d, yyyy')}</span>
-                      <span className="hidden sm:inline text-gray-300">•</span>
-                      <span className="hidden sm:inline">/{post.slug}</span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Link
-                      to={`/admin/blog/edit/${post.id}`}
-                      className="p-2 text-gray-400 hover:text-brand-600 hover:bg-brand-50 rounded-lg transition-colors"
-                      title="Edit Post"
-                    >
-                      <Edit2 className="w-5 h-5" />
-                    </Link>
-                    <button
-                      onClick={() => handleDelete(post.id)}
-                      className="p-2 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                      title="Delete Post"
-                    >
-                      <Trash2 className="w-5 h-5" />
-                    </button>
-                    {post.published && (
-                      <Link
-                        to={`/blog/${post.slug}`}
-                        target="_blank"
-                        className="ml-2 text-sm font-medium text-brand-600 hover:text-brand-700"
-                      >
-                        View Live
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              </li>
-            ))}
-          </ul>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
-      )}
+      </div>
+      
+      <div className="mt-8 p-6 rounded-2xl bg-teal-500/5 border border-teal-500/20 text-sm text-slate-400 flex items-start gap-4">
+        <div className="w-8 h-8 rounded-lg bg-teal-500/20 flex-shrink-0 flex items-center justify-center text-teal-500 font-bold">!</div>
+        <p>
+          <strong className="text-white block mb-1">Developer Notice:</strong>
+          This manager is currently in "View Only" mode. To enable real database persistence (Firebase), please use the setup tool or reconnect your configuration file.
+        </p>
+      </div>
     </div>
   );
-}
+};
+
+export default AdminBlog;

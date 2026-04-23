@@ -1,46 +1,32 @@
-export interface Currency {
-  code: string;
+export interface CountryData {
+  id: string;
   name: string;
-  symbol: string;
-  flag: string;
-  country: string;
-  iso: string; // ISO 3166-1 alpha-2 code for flags
+  code: string;
+  costLivingIndex: number;
+  rentIndex: number;
+  groceriesIndex: number;
+  restaurantIndex: number;
+  localPurchasingPowerIndex: number;
+  currency: string;
+  currencySymbol: string;
+  exchangeRate: number; // 1 USD to [Currency]
+  lat: number;
+  lng: number;
 }
 
-export interface ExchangeRates {
-  [key: string]: number;
-}
-
-export interface MillionaireResult {
-  currency: Currency;
-  localAmount: number;
-  isMillionaire: boolean;
-  valueForOneMillion: number; // How much of the user's base currency is 1M local
-}
-
-export interface UserPreferences {
-  userId: string;
-  email: string;
-  baseCurrency?: string;
-  netWorth?: number;
-  searchHistory?: string[];
-  isAdmin?: boolean;
-  updatedAt?: string;
-}
-
-export interface BlogPost {
+export interface Post {
   id: string;
   title: string;
-  slug: string;
-  summary?: string;
-  takeaways?: string[];
+  excerpt: string;
   content: string;
-  coverImageUrl?: string;
-  galleryImages?: string[];
-  authorId: string;
-  authorName: string;
-  tags?: string[];
-  published: boolean;
-  createdAt: string;
-  updatedAt?: string;
+  author: string;
+  date: string;
+  imageUrl: string;
+  slug: string;
+}
+
+export interface UserWealthInfo {
+  netWorth: number;
+  annualIncome: number;
+  currency: string;
 }

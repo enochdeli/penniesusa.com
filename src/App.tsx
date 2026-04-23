@@ -1,48 +1,41 @@
-import { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AuthProvider } from './AuthContext';
-import { ErrorBoundary } from './components/ErrorBoundary';
-import Layout from './components/Layout';
-import GlobalExplorer from './pages/GlobalExplorer';
-import WealthInsights from './pages/WealthInsights';
-import About from './pages/About';
-import CurrencyConverter from './pages/CurrencyConverter';
-import Blog from './pages/Blog';
-import BlogPost from './pages/BlogPost';
-import AdminBlog from './pages/AdminBlog';
-import AdminEditPost from './pages/AdminEditPost';
+import React, { Suspense, lazy } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import ErrorBoundary from './components/ErrorBoundary';
 
-function ScrollToTop() {
-  const { pathname } = useLocation();
-  
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+const GlobalExplorer = lazy(() => import('./pages/GlobalExplorer'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogPost = lazy(() => import('./pages/BlogPost'));
+const AdminBlog = lazy(() => import('./pages/AdminBlog'));
 
-  return null;
-}
-
-export default function App() {
+const App: React.FC = () => {
   return (
-    <ErrorBoundary>
-      <AuthProvider>
-        <Router>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Layout />}>
-              <Route index element={<GlobalExplorer />} />
-              <Route path="insights" element={<WealthInsights />} />
-              <Route path="converter" element={<CurrencyConverter />} />
-              <Route path="blog" element={<Blog />} />
-              <Route path="blog/:slug" element={<BlogPost />} />
-              <Route path="admin/blog" element={<AdminBlog />} />
-              <Route path="admin/blog/new" element={<AdminEditPost />} />
-              <Route path="admin/blog/edit/:id" element={<AdminEditPost />} />
-              <Route path="about" element={<About />} />
-            </Route>
-          </Routes>
-        </Router>
-      </AuthProvider>
-    </ErrorBoundary>
+    <Router>
+      <div className="min-h-screen flex flex-col bg-slate-950 text-slate-50 selection:bg-teal-500/30">
+        <Header />
+        <main className="flex-grow">
+          <ErrorBoundary>
+            <Suspense fallback={<LoadingSpinner />}>
+              <Routes>
+                <Route path="/" element={<GlobalExplorer />} />
+                <Route path="/blog" element={<Blog />} />
+                <Route path="/blog/:id" element={<BlogPost />} />
+                <Route path="/admin" element={<AdminBlog />} />
+              </Routes>
+            </Suspense>
+          </ErrorBoundary>
+        </main>
+        <Footer />
+      </div>
+    </Router>
   );
-}
+};
+
+const LoadingSpinner = () => (
+  <div className="flex items-center justify-center min-h-[60vh]">
+    <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-teal-500"></div>
+  </div>
+);
+
+export default App;

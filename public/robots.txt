@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap: https://penniesusa.com/sitemap.xml
