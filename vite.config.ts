@@ -7,6 +7,11 @@ export default defineConfig({
   server: {
     port: 3000,
     host: true,
+    allowedHosts: true,
+    hmr: {
+      clientPort: 443,
+    },
+    cors: true,
   },
   optimizeDeps: {
     force: true,

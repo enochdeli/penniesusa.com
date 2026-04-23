@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Calendar, User, ArrowLeft, Share2, Calculator } from 'lucide-react';
+import { Calendar, ArrowLeft, Share2, Calculator } from 'lucide-react';
 import { mockPosts } from '../services/blogService';
 
 const BlogPost: React.FC = () => {
