@@ -327,6 +327,84 @@ const GlobalExplorer: React.FC = () => {
                     </div>
                   </div>
 
+                  {/* Income Value Chart */}
+                  <div className="mt-8 p-8 rounded-[2rem] bg-white/5 border border-white/10">
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="p-2 rounded-lg bg-emerald-500/20 text-emerald-400">
+                        <DollarSign className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-lg">Income Value Comparison</h3>
+                        <p className="text-xs text-slate-500">Equivalent standard of living based on PPP</p>
+                      </div>
+                    </div>
+
+                    <div className="h-[300px] w-full">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart
+                          data={[
+                            { name: 'United States', value: income },
+                            { name: selectedCountry.name, value: calculatePPP(selectedCountry, income) }
+                          ]}
+                          margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
+                          layout="vertical"
+                        >
+                          <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="rgba(255,255,255,0.05)" />
+                          <XAxis 
+                            type="number" 
+                            stroke="#475569" 
+                            fontSize={12}
+                            tickLine={false}
+                            axisLine={false}
+                            tickFormatter={(value) => `$${value.toLocaleString()}`}
+                          />
+                          <YAxis 
+                            dataKey="name" 
+                            type="category" 
+                            stroke="#94a3b8" 
+                            fontSize={12}
+                            tickLine={false}
+                            axisLine={false}
+                            width={100}
+                          />
+                          <Tooltip 
+                            cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+                            contentStyle={{ 
+                              backgroundColor: '#0f172a', 
+                              border: '1px solid rgba(255,255,255,0.1)',
+                              borderRadius: '12px',
+                              fontSize: '12px'
+                            }}
+                            formatter={(value: number) => [`$${value.toLocaleString(undefined, { maximumFractionDigits: 0 })}`, 'Income Value']}
+                          />
+                          <Bar 
+                            dataKey="value" 
+                            radius={[0, 4, 4, 0]}
+                            barSize={40}
+                          >
+                            {[
+                              { name: 'United States' },
+                              { name: selectedCountry.name }
+                            ].map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={index === 0 ? '#475569' : '#10b981'} />
+                            ))}
+                          </Bar>
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                    
+                    <div className="mt-4 flex items-center justify-center gap-6">
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 rounded-full bg-slate-500" />
+                        <span className="text-xs text-slate-400 font-medium">US Baseline</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 rounded-full bg-emerald-500" />
+                        <span className="text-xs text-slate-400 font-medium">{selectedCountry.name}</span>
+                      </div>
+                    </div>
+                  </div>
+
                   <div className="mt-12 pt-8 border-t border-white/5">
                     <div className="flex flex-col md:flex-row gap-6 items-center justify-between text-sm">
                       <div className="flex items-center gap-2 text-slate-400">
