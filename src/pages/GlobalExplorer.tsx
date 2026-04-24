@@ -11,8 +11,19 @@ import {
   ArrowRight,
   Calculator,
   Search,
-  Wallet
+  Wallet,
+  BarChart3
 } from 'lucide-react';
+import { 
+  BarChart, 
+  Bar, 
+  XAxis, 
+  YAxis, 
+  CartesianGrid, 
+  Tooltip, 
+  ResponsiveContainer, 
+  Cell
+} from 'recharts';
 import { lifestyleData } from '../lifestyleData';
 import { CountryData } from '../types';
 
@@ -237,6 +248,83 @@ const GlobalExplorer: React.FC = () => {
                         <div className="text-xs text-slate-500 uppercase tracking-tighter">{idx.label}</div>
                       </div>
                     ))}
+                  </div>
+
+                  {/* Comparison Chart */}
+                  <div className="mt-12 p-8 rounded-[2rem] bg-white/5 border border-white/10">
+                    <div className="flex items-center gap-3 mb-8">
+                      <div className="p-2 rounded-lg bg-teal-500/20 text-teal-400">
+                        <BarChart3 className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <h3 className="font-bold text-lg">Cost of Living Index</h3>
+                        <p className="text-xs text-slate-500">Benchmark against US (New York = 100)</p>
+                      </div>
+                    </div>
+
+                    <div className="h-[300px] w-full">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <BarChart
+                          data={[
+                            { name: 'United States', index: 100, fill: '#64748b' },
+                            { name: selectedCountry.name, index: selectedCountry.costLivingIndex, fill: '#14b8a6' }
+                          ]}
+                          margin={{ top: 20, right: 30, left: 0, bottom: 0 }}
+                          layout="vertical"
+                        >
+                          <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="rgba(255,255,255,0.05)" />
+                          <XAxis 
+                            type="number" 
+                            domain={[0, 120]} 
+                            stroke="#475569" 
+                            fontSize={12}
+                            tickLine={false}
+                            axisLine={false}
+                          />
+                          <YAxis 
+                            dataKey="name" 
+                            type="category" 
+                            stroke="#94a3b8" 
+                            fontSize={12}
+                            tickLine={false}
+                            axisLine={false}
+                            width={100}
+                          />
+                          <Tooltip 
+                            cursor={{ fill: 'rgba(255,255,255,0.05)' }}
+                            contentStyle={{ 
+                              backgroundColor: '#0f172a', 
+                              border: '1px solid rgba(255,255,255,0.1)',
+                              borderRadius: '12px',
+                              fontSize: '12px'
+                            }}
+                          />
+                          <Bar 
+                            dataKey="index" 
+                            radius={[0, 4, 4, 0]}
+                            barSize={40}
+                          >
+                            {[
+                              { name: 'United States', index: 100 },
+                              { name: selectedCountry.name, index: selectedCountry.costLivingIndex }
+                            ].map((entry, index) => (
+                              <Cell key={`cell-${index}`} fill={index === 0 ? '#475569' : '#14b8a6'} />
+                            ))}
+                          </Bar>
+                        </BarChart>
+                      </ResponsiveContainer>
+                    </div>
+                    
+                    <div className="mt-4 flex items-center justify-center gap-6">
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 rounded-full bg-slate-500" />
+                        <span className="text-xs text-slate-400 font-medium">US Baseline</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-3 h-3 rounded-full bg-teal-500" />
+                        <span className="text-xs text-slate-400 font-medium">{selectedCountry.name}</span>
+                      </div>
+                    </div>
                   </div>
 
                   <div className="mt-12 pt-8 border-t border-white/5">
