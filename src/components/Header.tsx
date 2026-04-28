@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Globe2, BookOpen, LayoutDashboard, Coins, Zap, Info } from 'lucide-react';
+import { Coins } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 
@@ -12,46 +12,47 @@ const Header: React.FC = () => {
   const location = useLocation();
 
   const navItems = [
-    { name: 'Global Explorer', path: '/', icon: Globe2 },
-    { name: 'Converter', path: '/converter', icon: Coins },
-    { name: 'Wealth Insights', path: '/insights', icon: Zap },
-    { name: 'Blog', path: '/blog', icon: BookOpen },
-    { name: 'About', path: '/about', icon: Info },
-    { name: 'Admin', path: '/admin', icon: LayoutDashboard },
+    { name: 'GLOBAL EXPLORER', path: '/' },
+    { name: 'CONVERTER', path: '/converter' },
+    { name: 'WEALTH INSIGHTS', path: '/insights' },
+    { name: 'BLOG', path: '/blog' },
+    { name: 'ABOUT', path: '/about' },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full glass-dark border-b border-teal-500/10 py-4 px-6">
+    <header className="sticky top-0 z-50 w-full bg-[#F9FAFB]/90 backdrop-blur-md border-b border-slate-200 py-5 px-6">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-10 h-10 rounded-xl bg-teal-500 flex items-center justify-center group-hover:rotate-12 transition-transform shadow-[0_0_15px_rgba(20,184,166,0.4)]">
-            <span className="text-white font-black text-xl leading-none">P</span>
+          <div className="w-10 h-10 rounded-xl bg-teal-500 flex items-center justify-center group-hover:rotate-12 transition-transform shadow-[0_0_15px_rgba(20,184,166,0.2)]">
+             <Coins className="w-6 h-6 text-white" />
           </div>
-          <span className="text-xl font-black tracking-tight text-white hidden sm:block">
-            pennies<span className="text-teal-500 text-2xl">usa</span>
+          <span className="text-2xl font-black tracking-tight text-slate-900 hidden sm:block">
+            pennies<span className="text-teal-500">usa</span>
           </span>
         </Link>
 
-        <nav className="flex items-center gap-1 sm:gap-6">
+        <nav className="flex items-center gap-1 sm:gap-8">
           {navItems.map((item) => {
-            const Icon = item.icon;
             const isActive = location.pathname === item.path;
             return (
               <Link
                 key={item.path}
                 to={item.path}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300",
+                  "hidden md:block text-xs font-bold tracking-wider transition-all duration-300",
                   isActive 
-                    ? "bg-teal-500/10 text-teal-400 shadow-[inset_0_0_10px_rgba(20,184,166,0.05)]" 
-                    : "text-slate-400 hover:text-white hover:bg-white/5"
+                    ? "text-teal-500" 
+                    : "text-slate-500 hover:text-slate-900"
                 )}
               >
-                <Icon className={cn("w-4 h-4", isActive && "animate-pulse")} />
-                <span className="hidden sm:inline">{item.name}</span>
+                {item.name}
               </Link>
             );
           })}
+          
+          <button className="ml-4 px-6 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold tracking-wider rounded-full shadow-lg transition-transform hover:scale-105 active:scale-95">
+            CONNECT
+          </button>
         </nav>
       </div>
     </header>

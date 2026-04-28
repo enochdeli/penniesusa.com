@@ -16,7 +16,7 @@ import AdminEditPost from './pages/AdminEditPost';
 const App: React.FC = () => {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-slate-950 text-slate-50 selection:bg-teal-500/30">
+      <div className="min-h-screen flex flex-col bg-[#F9FAFB] text-slate-900 font-sans selection:bg-teal-500/30">
         <Header />
         <main className="flex-grow">
           <ErrorBoundary>
