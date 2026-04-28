@@ -30,6 +30,7 @@ const App: React.FC = () => {
               <Route path="/admin" element={<AdminBlog />} />
               <Route path="/admin/new" element={<AdminEditPost />} />
               <Route path="/admin/edit/:id" element={<AdminEditPost />} />
+              <Route path="*" element={<GlobalExplorer />} />
             </Routes>
           </ErrorBoundary>
         </main>
